@@ -20,14 +20,14 @@ public class Player {
 	}
 
 	public void update() {
-		if (Gdx.input.isKeyPressed(Keys.W)) {
+		/*if (Gdx.input.isKeyPressed(Keys.W)) {
 			position.add(0, 5);
 			// playerPos.set(new vector2(playerPos.x+20,));
 		}
 		if (Gdx.input.isKeyPressed(Keys.S)) {
 			position.add(0, -5);
 			// playerPos.set(new vector2(playerPos.x+20,));
-		}
+		}*/
 		long elapsed = (System.nanoTime()-startTime)/1000000;
         if(elapsed>100)
         {
