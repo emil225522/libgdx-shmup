@@ -1,6 +1,7 @@
 package com.mygdx.game.objects;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -17,12 +18,15 @@ public class Player {
 	int score;
 	int bulletTimer = 0;
 	ArrayList<Bullet> bullets;
+	Random rnd;
 
 	public Player(Vector2 position, Texture texture, ArrayList<Bullet> bullets) {
 		this.texture = texture;
 		this.position = position;
 		this.bullets = bullets;
+		
 		this.score = 0;
+		this.rnd = new Random();
 	}
 
 	public void update() {
@@ -39,8 +43,9 @@ public class Player {
 			bulletTimer++;
 			if (bulletTimer > 10) {
 				bulletTimer = 0;
+				float ofSet = rnd.nextFloat() - 0.5f;
 				bullets.add(new Bullet(new Vector2(position.x + texture.getWidth(), position.y),
-						new Texture("bullet.png")));
+						new Texture("bullet.png"), ofSet));
 			}
 		}
 	}
@@ -77,6 +82,7 @@ public class Player {
 
 	public void draw(SpriteBatch spriteBatch) {
 		spriteBatch.draw(texture, position.x, position.y);
+		
 	}
 
 }
