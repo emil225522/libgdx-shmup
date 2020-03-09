@@ -11,24 +11,23 @@ public abstract class Enemy {
 	Rectangle hitBox;
 	int life = 0;
 	boolean isDead = false;
-	
-	public Enemy(Vector2 position, Texture texture, int life) {
+
+	public Enemy(Vector2 position, Texture texture, int  life) {
 		this.texture = texture;
 		this.position = position;
 		this.life = life;
-		this.hitBox = new Rectangle(position.x,position.y,texture.getWidth(),texture.getHeight());
+		this.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 	}
-	
+
 	public void update() {
-		
-		
+
 		if (life <= 0) {
 			isDead = true;
 		}
 	}
-	
+
 	public void draw(SpriteBatch spriteBatch) {
-		spriteBatch.draw(texture,position.x,position.y);
+		spriteBatch.draw(texture, position.x, position.y);
 	}
 
 }
