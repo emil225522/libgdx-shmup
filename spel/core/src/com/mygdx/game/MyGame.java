@@ -26,7 +26,7 @@ public class MyGame extends Game {
 	public void create() {
 		spriteBatch = new SpriteBatch();
 		img = new Texture("alien.png");
-		player = new Player(new Vector2(20, 200), new Texture("alien.png"));
+		player = new Player(new Vector2(20, 200), new Texture("alien.png"), bullets);
 
 	}
 
@@ -45,11 +45,6 @@ public class MyGame extends Game {
 
 	public void generalUpdate() {
 		player.update();
-		bulletTimer++;
-		if (bulletTimer > 10) {
-			bulletTimer = 0;
-			bullets.add(new Bullet(new Vector2(player.getPosition().x + player.getTexture().getWidth(),player.getPosition().y), new Texture("bullet.png")));
-		}
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).update();
 		}
