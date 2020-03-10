@@ -9,10 +9,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.objects.Bird;
+/*import com.mygdx.game.objects.Bird;
 import com.mygdx.game.objects.Bullet;
 import com.mygdx.game.objects.Enemy;
-import com.mygdx.game.objects.Player;
+import com.mygdx.game.objects.Player;*/
+import com.mygdx.game.objects.*;
 
 public class MyGame extends Game {
 	SpriteBatch spriteBatch;
@@ -55,6 +56,7 @@ public class MyGame extends Game {
 		if(spawnTimer > 100) {
 			spawnTimer = 0;
 			enemies.add(new Bird(new Vector2(500,200), new Texture("bird.png"), 5));
+			enemies.add(new vapeMormon(new Vector2(500,100),new Texture("vapeMormon2.png"),5));
 		}
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).update();
