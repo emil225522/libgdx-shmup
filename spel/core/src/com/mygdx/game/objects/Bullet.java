@@ -25,7 +25,7 @@ public class Bullet {
 	public void draw(SpriteBatch spriteBatch) {
 		// spriteBatch.draw(texture,position.x,position.y);
 		spriteBatch.draw(texture, position.x, position.y,
-				texture.getWidth() - (Math.abs(offSet) * texture.getWidth() / 2),
-				texture.getHeight() - (Math.abs(offSet) * texture.getHeight()) / 2);
+				texture.getWidth() - (Math.abs(ofSet) * texture.getWidth() / 1.5f),
+				texture.getHeight() - (Math.abs(ofSet) * texture.getHeight()) / 1.5f);
 	}
 }
