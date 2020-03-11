@@ -43,9 +43,9 @@ public class Player {
 			bulletTimer++;
 			if (bulletTimer > 10) {
 				bulletTimer = 0;
-				float ofSet = rnd.nextFloat() - 0.5f;
+				float offSet = rnd.nextFloat() - 0.5f;
 				bullets.add(new Bullet(new Vector2(position.x + texture.getWidth(), position.y),
-						new Texture("bullet.png"), ofSet));
+						new Texture("bullet.png"), offSet));
 			}
 		}
 	}

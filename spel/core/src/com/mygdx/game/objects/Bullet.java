@@ -9,23 +9,23 @@ import com.badlogic.gdx.math.Vector2;
 public class Bullet {
 	Texture texture;
 	Vector2 position;
-	float ofSet;
+	float offSet;
 
 	public Bullet(Vector2 position, Texture texture, float ofSet) {
 		this.texture = texture;
 		this.position = position;
-		this.ofSet = ofSet;
+		this.offSet = ofSet;
 	}
 
 	public void update() {
-		position.add(5, ofSet);
+		position.add(5, offSet);
 
 	}
 
 	public void draw(SpriteBatch spriteBatch) {
 		// spriteBatch.draw(texture,position.x,position.y);
 		spriteBatch.draw(texture, position.x, position.y,
-				texture.getWidth() - (Math.abs(ofSet) * texture.getWidth() / 2),
-				texture.getHeight() - (Math.abs(ofSet) * texture.getHeight()) / 2);
+				texture.getWidth() - (Math.abs(offSet) * texture.getWidth() / 2),
+				texture.getHeight() - (Math.abs(offSet) * texture.getHeight()) / 2);
 	}
 }
