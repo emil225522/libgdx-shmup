@@ -25,13 +25,14 @@ public class MyGame extends Game {
 	ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
 	public GameScreen gameScreen;
-
+	
 	@Override
 	public void create() {
 		spriteBatch = new SpriteBatch();
 		img = new Texture("alien.png");
 		player = new Player(new Vector2(20, 200), new Texture("alien.png"), bullets);
-
+		gameScreen = new GameScreen();
+		gameScreen.resize(1000, 1000);
 	}
 
 	@Override
@@ -53,10 +54,10 @@ public class MyGame extends Game {
 	public void generalUpdate() {
 		player.update();
 		spawnTimer++;
-		if(spawnTimer > 100) {
+		if (spawnTimer > 100) {
 			spawnTimer = 0;
-			enemies.add(new Bird(new Vector2(500,200), new Texture("bird.png"), 5));
-			enemies.add(new vapeMormon(new Vector2(500,100),new Texture("vapeMormon2.png"),5));
+			enemies.add(new Bird(new Vector2(500, 200), new Texture("bird.png"), 5));
+			enemies.add(new vapeMormon(new Vector2(500, 100), new Texture("vapeMormon2.png"), 5, bullets, player));
 		}
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).update();

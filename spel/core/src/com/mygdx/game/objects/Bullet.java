@@ -8,16 +8,17 @@ public class Bullet {
 	Texture texture;
 	Vector2 position;
 	float offSet;
+	Vector2 dir;
 
-	public Bullet(Vector2 position, Texture texture, float offSet) {
+	public Bullet(Vector2 position, Texture texture, float offSet, Vector2 dir) {
 		this.texture = texture;
 		this.position = position;
 		this.offSet = offSet;
+		this.dir = dir;
 	}
 
 	public void update() {
-		position.add(5, offSet);
-
+		position.add(dir);
 	}
 
 	public void draw(SpriteBatch spriteBatch) {

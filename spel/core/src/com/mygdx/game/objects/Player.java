@@ -45,7 +45,7 @@ public class Player {
 				bulletTimer = 0;
 				float offSet = rnd.nextFloat() - 0.5f;
 				bullets.add(new Bullet(new Vector2(position.x + texture.getWidth(), position.y),
-						new Texture("bullet.png"), offSet));
+						new Texture("bullet.png"), offSet, new Vector2(5,0)));
 			}
 		}
 	}
