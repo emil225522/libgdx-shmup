@@ -25,7 +25,7 @@ public class MyGame extends Game {
 	ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
 	public GameScreen gameScreen;
-	
+
 	@Override
 	public void create() {
 		spriteBatch = new SpriteBatch();
@@ -62,8 +62,29 @@ public class MyGame extends Game {
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).update();
 		}
+
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).update();
+		}
+		for (int i = 0; i < enemies.size(); i++) {
+			for (int j = 0; j < bullets.size(); j++) {
+				if (enemies.get(i).getHitBox().overlaps(bullets.get(j).getHitBox())) {
+					enemies.remove(i);
+					bullets.remove(j);
+					break;
+				}
+			}
+
+		}
+		for (int i = 0; i < bullets.size(); i++) {
+			if (bullets.get(i).isDead == true) {
+				bullets.remove(i);
+			}
+		}
+		for (int i = 0; i < enemies.size(); i++) {
+			if (enemies.get(i).isDead == true) {
+				enemies.remove(i);
+			}
 		}
 	}
 
