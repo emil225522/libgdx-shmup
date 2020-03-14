@@ -1,6 +1,7 @@
 package com.mygdx.game.objects;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class Bird extends Enemy {
@@ -11,8 +12,12 @@ public class Bird extends Enemy {
 	}
 
 	public void update() {
-
-		position.x -= 5;
+		super.update();
+		System.out.println(position.x +" "+ position.y);
+		position.x -= 2;
+	}
+	public void draw(SpriteBatch spriteBatch) {
+		super.draw(spriteBatch);
 	}
 
 }

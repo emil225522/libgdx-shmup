@@ -20,6 +20,7 @@ public class vapeMormon extends Enemy {
 	}
 	
 	public void update() {
+		super.update();
 		position.add(-1, 0);
 		
 		spincounter+=0.1;

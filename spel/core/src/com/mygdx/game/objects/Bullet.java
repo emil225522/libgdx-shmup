@@ -21,7 +21,7 @@ public class Bullet {
 	}
 
 	public void update() {
-		this.hitBox = new Rectangle(position.x, position.y, 50, 50);
+		this.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 		position.add(dir);
 		
 	}

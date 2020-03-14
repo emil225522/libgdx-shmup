@@ -1,10 +1,10 @@
 package com.mygdx.game;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,11 +16,14 @@ import com.mygdx.game.objects.Player;*/
 import com.mygdx.game.objects.*;
 
 public class MyGame extends Game {
+	final int WINDOW_WIDTH = 1000;
+	final int WINDOW_HEIGHT = 750;
 	SpriteBatch spriteBatch;
 	Texture img;
 	Player player;
 	long startTime = System.nanoTime();
 	int spawnTimer = 0;
+	Random random = new Random();
 	ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 
@@ -32,7 +35,7 @@ public class MyGame extends Game {
 		img = new Texture("alien.png");
 		player = new Player(new Vector2(20, 200), new Texture("alien.png"), bullets);
 		gameScreen = new GameScreen();
-		gameScreen.resize(1000, 1000);
+		gameScreen.resize(WINDOW_WIDTH,WINDOW_HEIGHT);
 	}
 
 	@Override
@@ -54,10 +57,11 @@ public class MyGame extends Game {
 	public void generalUpdate() {
 		player.update();
 		spawnTimer++;
-		if (spawnTimer > 100) {
+		if (spawnTimer > 50) {
 			spawnTimer = 0;
-			enemies.add(new Bird(new Vector2(500, 200), new Texture("bird.png"), 5));
-			enemies.add(new vapeMormon(new Vector2(500, 100), new Texture("vapeMormon2.png"), 5, bullets, player));
+			enemies.add(new Bird(new Vector2(WINDOW_WIDTH, random.nextInt(WINDOW_HEIGHT - 45*3)+ 45), new Texture("bird.png"), 5));
+			// enemies.add(new vapeMormon(new Vector2(500, 100), new
+			// Texture("vapeMormon2.png"), 5, bullets, player));
 		}
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).update();
@@ -66,15 +70,15 @@ public class MyGame extends Game {
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).update();
 		}
-		for (int i = 0; i < enemies.size(); i++) {
-			for (int j = 0; j < bullets.size(); j++) {
-				if (enemies.get(i).getHitBox().overlaps(bullets.get(j).getHitBox())) {
-					enemies.remove(i);
-					bullets.remove(j);
-					break;
+		for (Bullet bullet : bullets) {
+			for (Enemy enemy : enemies) {
+				if (bullet.getHitBox().overlaps(enemy.getHitBox())) {
+					enemy.position.x += 5;
+					enemy.doDamage(1);
+					bullet.isDead = true;
 				}
-			}
 
+			}
 		}
 		for (int i = 0; i < bullets.size(); i++) {
 			if (bullets.get(i).isDead == true) {

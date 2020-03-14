@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public abstract class Enemy {
 	Texture texture;
-	Vector2 position;
+	public Vector2 position;
 	Rectangle hitBox = new Rectangle();
 	int life = 0;
 	public boolean isDead = false;
@@ -16,11 +16,11 @@ public abstract class Enemy {
 		this.texture = texture;
 		this.position = position;
 		this.life = life;
-		this.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 	}
 
 	public void update() {
-		this.hitBox = new Rectangle(position.x, position.y, 50, 50);
+		hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
+		//System.out.println(texture.getWidth()  +"  enemy  " +  texture.getHeight());
 		if (life <= 0) {
 			isDead = true;
 		}
@@ -32,6 +32,9 @@ public abstract class Enemy {
 
 	public Rectangle getHitBox() {
 		return hitBox;
+	}
+	public void doDamage(int damage) {
+		life-= damage;
 	}
 
 }
