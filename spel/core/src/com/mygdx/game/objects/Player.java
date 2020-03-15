@@ -76,7 +76,7 @@ public class Player {
 			dy = -4;
 		}
 
-		if (position.y > 420 - dy || position.y < 0 - dy) {
+		if (position.y > 700 - dy || position.y < 0 - dy) {
 			dy *= -1;
 		}
 

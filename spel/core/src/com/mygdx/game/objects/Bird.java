@@ -13,7 +13,6 @@ public class Bird extends Enemy {
 
 	public void update() {
 		super.update();
-		System.out.println(position.x +" "+ position.y);
 		position.x -= 2;
 	}
 	public void draw(SpriteBatch spriteBatch) {
