@@ -1,5 +1,7 @@
 package com.mygdx.game.objects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -11,6 +13,7 @@ public abstract class Enemy {
 	Rectangle hitBox = new Rectangle();
 	int life = 0;
 	public boolean isDead = false;
+	Sound sound = Gdx.audio.newSound(Gdx.files.internal("nice.mp3"));
 
 	public Enemy(Vector2 position, Texture texture, int life) {
 		this.texture = texture;
@@ -20,8 +23,11 @@ public abstract class Enemy {
 
 	public void update() {
 		hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
-		//System.out.println(texture.getWidth()  +"  enemy  " +  texture.getHeight());
 		if (life <= 0) {
+			sound.play(0.5f);
+			isDead = true;
+		}
+		if ( position.x < -100) {
 			isDead = true;
 		}
 	}

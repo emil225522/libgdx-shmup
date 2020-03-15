@@ -5,6 +5,7 @@ import java.util.Random;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,8 +17,8 @@ import com.mygdx.game.objects.Player;*/
 import com.mygdx.game.objects.*;
 
 public class MyGame extends Game {
-	final int WINDOW_WIDTH = 1000;
-	final int WINDOW_HEIGHT = 750;
+	int WINDOW_WIDTH = 1000;
+	int WINDOW_HEIGHT = 750;
 	SpriteBatch spriteBatch;
 	Texture img;
 	Player player;
@@ -29,13 +30,16 @@ public class MyGame extends Game {
 
 	public GameScreen gameScreen;
 
+	public MyGame(int screenHeight, int screenWidth) {
+		 WINDOW_WIDTH = screenHeight;
+		 WINDOW_HEIGHT = screenWidth;
+	}
 	@Override
 	public void create() {
 		spriteBatch = new SpriteBatch();
 		img = new Texture("alien.png");
 		player = new Player(new Vector2(20, 200), new Texture("alien.png"), bullets);
 		gameScreen = new GameScreen();
-		gameScreen.resize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	}
 
 	@Override
@@ -59,7 +63,7 @@ public class MyGame extends Game {
 		spawnTimer++;
 		if (spawnTimer > 50) {
 			spawnTimer = 0;
-			enemies.add(new Bird(new Vector2(WINDOW_WIDTH, random.nextInt(WINDOW_HEIGHT - 45 * 3) + 45),
+			enemies.add(new Bird(new Vector2(WINDOW_WIDTH, random.nextInt(WINDOW_HEIGHT - 45 * 4) + 45),
 					new Texture("bird.png"), 5));
 			enemies.add(new vapeMormon(new Vector2(500, 100), new Texture("vapeMormon2.png"), 5, bullets, player));
 		}
