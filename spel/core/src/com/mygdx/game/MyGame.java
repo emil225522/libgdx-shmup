@@ -38,7 +38,7 @@ public class MyGame extends Game {
 	public void create() {
 		spriteBatch = new SpriteBatch();
 		img = new Texture("alien.png");
-		player = new Player(new Vector2(20, 200), new Texture("alien.png"), bullets);
+		player = new Player(new Vector2(20, WINDOW_HEIGHT/2), new Texture("alien.png"), bullets);
 		gameScreen = new GameScreen();
 	}
 
@@ -61,11 +61,14 @@ public class MyGame extends Game {
 	public void generalUpdate() {
 		player.update();
 		spawnTimer++;
-		if (spawnTimer > 50) {
+		if (spawnTimer > 100) {
 			spawnTimer = 0;
 			enemies.add(new Bird(new Vector2(WINDOW_WIDTH, random.nextInt(WINDOW_HEIGHT - 45 * 4) + 45),
 					new Texture("bird.png"), 5));
-			enemies.add(new vapeMormon(new Vector2(500, 100), new Texture("vapeMormon2.png"), 5, bullets, player));
+			if (random.nextInt(5)==1) {
+			enemies.add(new vapeMormon(new Vector2(WINDOW_WIDTH, random.nextInt(WINDOW_HEIGHT - 45 * 4) + 45)
+					, new Texture("vapeMormon2.png"), 5, bullets, player));
+			}
 		}
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).update();

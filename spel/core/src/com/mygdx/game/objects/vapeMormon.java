@@ -30,9 +30,9 @@ public class vapeMormon extends Enemy {
 		position.add(dir);
 		
 		bulletTimer++;
-		if (bulletTimer > 10) {
+		if (bulletTimer > 100) {
 			bulletTimer = 0;
-			Vector2 shootDir = new Vector2((player.getPosition().x - this.position.x)/30,(player.getPosition().y-this.position.y)/30);
+			Vector2 shootDir = new Vector2((player.getPosition().x - this.position.x)/50,(player.getPosition().y-this.position.y)/50);
 			//float offSet = rnd.nextFloat() - 0.5f;
 			bullets.add(new EnemyBullet(new Vector2(position.x + texture.getWidth(), position.y), new Texture("bullet.png"), 0, shootDir));
 		}
