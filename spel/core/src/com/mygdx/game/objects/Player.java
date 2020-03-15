@@ -17,6 +17,7 @@ public class Player {
 	float dya = 2;
 	long startTime = System.nanoTime();
 	int score;
+	int life;
 	int bulletTimer = 0;
 	ArrayList<Bullet> bullets;
 	Random rnd;
@@ -28,6 +29,7 @@ public class Player {
 		this.bullets = bullets;
 		this.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 		this.score = 0;
+		this.life = 1000;
 		this.rnd = new Random();
 	}
 
@@ -79,6 +81,9 @@ public class Player {
 		}
 
 		position.y += dy;
+	}
+	public void doDamage(int damage) {
+		life-= damage;
 	}
 
 	public Vector2 getPosition() {

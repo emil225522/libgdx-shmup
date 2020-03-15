@@ -35,7 +35,7 @@ public class MyGame extends Game {
 		img = new Texture("alien.png");
 		player = new Player(new Vector2(20, 200), new Texture("alien.png"), bullets);
 		gameScreen = new GameScreen();
-		gameScreen.resize(WINDOW_WIDTH,WINDOW_HEIGHT);
+		gameScreen.resize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	}
 
 	@Override
@@ -59,9 +59,9 @@ public class MyGame extends Game {
 		spawnTimer++;
 		if (spawnTimer > 50) {
 			spawnTimer = 0;
-			enemies.add(new Bird(new Vector2(WINDOW_WIDTH, random.nextInt(WINDOW_HEIGHT - 45*3)+ 45), new Texture("bird.png"), 5));
-			// enemies.add(new vapeMormon(new Vector2(500, 100), new
-			// Texture("vapeMormon2.png"), 5, bullets, player));
+			enemies.add(new Bird(new Vector2(WINDOW_WIDTH, random.nextInt(WINDOW_HEIGHT - 45 * 3) + 45),
+					new Texture("bird.png"), 5));
+			enemies.add(new vapeMormon(new Vector2(500, 100), new Texture("vapeMormon2.png"), 5, bullets, player));
 		}
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).update();
@@ -70,16 +70,11 @@ public class MyGame extends Game {
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).update();
 		}
-		for (Bullet bullet : bullets) {
-			for (Enemy enemy : enemies) {
-				if (bullet.getHitBox().overlaps(enemy.getHitBox())) {
-					enemy.position.x += 5;
-					enemy.doDamage(1);
-					bullet.isDead = true;
-				}
+		handleBulletCollision();
+		removeDead();
+	}
 
-			}
-		}
+	private void removeDead() {
 		for (int i = 0; i < bullets.size(); i++) {
 			if (bullets.get(i).isDead == true) {
 				bullets.remove(i);
@@ -88,6 +83,23 @@ public class MyGame extends Game {
 		for (int i = 0; i < enemies.size(); i++) {
 			if (enemies.get(i).isDead == true) {
 				enemies.remove(i);
+			}
+		}
+	}
+
+	private void handleBulletCollision() {
+		for (Bullet bullet : bullets) {
+			for (Enemy enemy : enemies) {
+				if (bullet.getHitBox().overlaps(enemy.getHitBox()) && !(bullet instanceof EnemyBullet)) {
+					enemy.position.x += 5;
+					enemy.doDamage(1);
+					bullet.isDead = true;
+				}
+				if (bullet.getHitBox().overlaps(player.getHitBox()) && (bullet instanceof EnemyBullet)) {
+					player.doDamage(1);
+					bullet.isDead = true;
+				}
+
 			}
 		}
 	}

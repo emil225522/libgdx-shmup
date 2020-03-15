@@ -10,8 +10,5 @@ public class EnemyBullet extends Bullet {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void update() {
-		
-	}
 
 }
