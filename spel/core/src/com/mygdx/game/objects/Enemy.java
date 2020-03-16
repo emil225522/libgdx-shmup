@@ -26,6 +26,7 @@ public abstract class Enemy {
 		if (life <= 0) {
 			sound.play(0.5f);
 			isDead = true;
+			Player.addToScore(10);
 		}
 		if ( position.x < -100) {
 			isDead = true;

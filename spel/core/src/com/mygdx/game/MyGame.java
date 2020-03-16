@@ -6,9 +6,12 @@ import java.util.Random;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 /*import com.mygdx.game.objects.Bird;
 import com.mygdx.game.objects.Bullet;
@@ -27,6 +30,7 @@ public class MyGame extends Game {
 	Random random = new Random();
 	ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	BitmapFont font;
 
 	public GameScreen gameScreen;
 
@@ -39,7 +43,7 @@ public class MyGame extends Game {
 		spriteBatch = new SpriteBatch();
 		img = new Texture("alien.png");
 		player = new Player(new Vector2(20, WINDOW_HEIGHT/2), new Texture("alien.png"), bullets);
-		gameScreen = new GameScreen();
+		font = new BitmapFont(Gdx.files.internal("fon.fnt"), false);
 	}
 
 	@Override
@@ -55,6 +59,7 @@ public class MyGame extends Game {
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).draw(spriteBatch);
 		}
+		font.draw(spriteBatch, "Score: " + player.getScore(), 100, 740);
 		spriteBatch.end();
 	}
 

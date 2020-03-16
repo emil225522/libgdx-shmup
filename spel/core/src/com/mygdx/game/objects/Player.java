@@ -16,7 +16,7 @@ public class Player {
 	float dy = 0;
 	float dya = 2;
 	long startTime = System.nanoTime();
-	int score;
+	static int score;
 	int life;
 	int bulletTimer = 0;
 	ArrayList<Bullet> bullets;
@@ -55,11 +55,8 @@ public class Player {
 	}
 
 	private void updateScore() {
+		//vill göra något här sen
 		long elapsed = (System.nanoTime() - startTime) / 1000000;
-		if (elapsed > 100) {
-			score++;
-			startTime = System.nanoTime();
-		}
 	}
 
 	private void handleMove() {
@@ -96,6 +93,12 @@ public class Player {
 
 	public Rectangle getHitBox() {
 		return hitBox;
+	}
+	public int getScore() {
+		return score;
+	}
+	public static void addToScore(int scoreToAdd) {
+		score+= scoreToAdd;
 	}
 	public void draw(SpriteBatch spriteBatch) {
 		spriteBatch.draw(texture, position.x, position.y);
