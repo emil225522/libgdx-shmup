@@ -11,6 +11,7 @@ public class vapeMormon extends Enemy {
 	private int bulletTimer = 0;
 	ArrayList<Bullet> bullets;
 	Player player;
+	//public static final int VAPEGLOBAL = 5;
 
 	public vapeMormon(Vector2 position, Texture texture, int life, ArrayList<Bullet> bullets, Player player) {
 		super(position, texture, life);

@@ -26,7 +26,6 @@ public class Bullet {
 		position.add(dir);
 		if (position.x > 1100 || position.x < 0)
 			isDead = true;
-
 	}
 
 	public void draw(SpriteBatch spriteBatch) {
