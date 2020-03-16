@@ -8,12 +8,13 @@ public class Bird extends Enemy {
 
 	public Bird(Vector2 position, Texture texture, int life) {
 		super(position, texture, life);
-		// TODO Auto-generated constructor stub
+		maxSpeed = -3;
+		velocity.x = maxSpeed;
 	}
 
 	public void update() {
 		super.update();
-		position.x -= 2;
+
 	}
 	public void draw(SpriteBatch spriteBatch) {
 		super.draw(spriteBatch);

@@ -18,6 +18,8 @@ public class vapeMormon extends Enemy {
 		dir = new Vector2(0,0);
 		this.bullets = bullets;
 		this.player = player;
+		maxSpeed = -3;
+		velocity.x = maxSpeed;
 	}
 	
 	public void update() {

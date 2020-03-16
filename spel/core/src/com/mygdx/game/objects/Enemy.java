@@ -10,7 +10,9 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class Enemy {
 	Texture texture;
 	public Vector2 position;
+	public Vector2 velocity = new Vector2();
 	Rectangle hitBox = new Rectangle();
+	int maxSpeed;
 	int life = 0;
 	public boolean isDead = false;
 	Sound sound = Gdx.audio.newSound(Gdx.files.internal("nice.mp3"));
@@ -23,6 +25,11 @@ public abstract class Enemy {
 
 	public void update() {
 		hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
+		position.x+=velocity.x;
+		
+		if (velocity.x > maxSpeed) {
+			velocity.x -=0.5f;
+		}
 		if (life <= 0) {
 			sound.play(0.5f);
 			isDead = true;

@@ -103,7 +103,7 @@ public class MyGame extends Game {
 		for (Bullet bullet : bullets) {
 			for (Enemy enemy : enemies) {
 				if (bullet.getHitBox().overlaps(enemy.getHitBox()) && !(bullet instanceof EnemyBullet)) {
-					enemy.position.x += 5;
+					enemy.velocity.x = 2;
 					enemy.doDamage(1);
 					bullet.isDead = true;
 				}
