@@ -1,5 +1,6 @@
 package com.mygdx.game.objects;
 
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -13,6 +14,7 @@ public class Bullet {
 	Vector2 dir;
 	public boolean isDead = false;
 	Rectangle hitBox = new Rectangle();
+	
 
 	public Bullet(Vector2 position, Texture texture, float offSet, Vector2 dir) {
 		this.texture = texture;
@@ -24,8 +26,10 @@ public class Bullet {
 	public void update() {
 		this.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 		position.add(dir);
+		position.add(0, offSet);
 		if (position.x > 1100 || position.x < 0)
 			isDead = true;
+		
 	}
 
 	public void draw(SpriteBatch spriteBatch) {

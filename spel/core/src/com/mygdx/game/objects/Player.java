@@ -48,8 +48,8 @@ public class Player {
 			if (bulletTimer > 10) {
 				bulletTimer = 0;
 				float offSet = rnd.nextFloat() - 0.5f;
-				bullets.add(new Bullet(new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight()/2),
-						new Texture("bullet.png"), offSet, new Vector2(7, 0)));
+				bullets.add(new SuperBullet(new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight()/2),
+						new Texture("bullet.png"), offSet, new Vector2(7, 0),bullets));
 			}
 		}
 	}
