@@ -24,7 +24,7 @@ public class Bullet {
 	public void update() {
 		this.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 		position.add(dir);
-		if (position.x > 1100)
+		if (position.x > 1100 || position.x < 0)
 			isDead = true;
 
 	}
