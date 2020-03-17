@@ -15,7 +15,13 @@ public class Bullet {
 	public boolean isDead = false;
 	Rectangle hitBox = new Rectangle();
 	
-
+//angle in radians
+	public Bullet(Vector2 position, Texture texture, float offSet,double angle, int speed) {
+		this.texture = texture;
+		this.position = position;
+		this.offSet = offSet;
+		this.dir = new Vector2((float)Math.cos(angle)*speed,(float)Math.sin(angle)*speed);
+	}
 	public Bullet(Vector2 position, Texture texture, float offSet, Vector2 dir) {
 		this.texture = texture;
 		this.position = position;
