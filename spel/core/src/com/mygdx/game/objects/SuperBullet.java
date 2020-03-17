@@ -22,8 +22,11 @@ public class SuperBullet extends Bullet {
 	public void update() {
 		super.update();
 		if(rnd.nextInt(1000) > 990) {
-			bullets.add(new Bullet(new Vector2(this.position),this.texture,0,-Math.PI/4,7));
-			bullets.add(new Bullet(new Vector2(this.position),this.texture,0,Math.PI/4,7));
+			//bullets.add(new Bullet(new Vector2(this.position),this.texture,0,-Math.PI/4,7));
+			//bullets.add(new Bullet(new Vector2(this.position),this.texture,0,Math.PI/4,7));
+			for(double i = 0; i < Math.PI*2; i += Math.PI/6) {
+				bullets.add(new Bullet(new Vector2(this.position),this.texture,0,i,7));
+			}
 			super.isDead=true;
 		}
 	}
