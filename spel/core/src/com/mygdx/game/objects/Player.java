@@ -109,6 +109,8 @@ public class Player {
 	public void doDamage(int damage) {
 		if (isDamaged == false) {
 			life -= damage;
+			if (life < 1)
+				System.exit(1);
 			isDamaged = true;
 		}
 	}
