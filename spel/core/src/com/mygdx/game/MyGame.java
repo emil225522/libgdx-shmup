@@ -35,14 +35,15 @@ public class MyGame extends Game {
 	public GameScreen gameScreen;
 
 	public MyGame(int screenHeight, int screenWidth) {
-		 WINDOW_WIDTH = screenHeight;
-		 WINDOW_HEIGHT = screenWidth;
+		WINDOW_WIDTH = screenHeight;
+		WINDOW_HEIGHT = screenWidth;
 	}
+
 	@Override
 	public void create() {
 		spriteBatch = new SpriteBatch();
 		img = new Texture("alien.png");
-		player = new Player(new Vector2(20, WINDOW_HEIGHT/2), new Texture("alien.png"), bullets);
+		player = new Player(new Vector2(20, WINDOW_HEIGHT / 2), new Texture("alien.png"), bullets);
 		font = new BitmapFont(Gdx.files.internal("fon.fnt"), false);
 	}
 
@@ -54,12 +55,20 @@ public class MyGame extends Game {
 		spriteBatch.begin();
 		player.draw(spriteBatch);
 		for (int i = 0; i < bullets.size(); i++) {
-			bullets.get(i).draw(spriteBatch);
+
+			if (bullets.get(i) instanceof EnemyBullet) {
+				spriteBatch.setColor(Color.RED);
+				bullets.get(i).draw(spriteBatch);
+				spriteBatch.setColor(Color.WHITE);
+			} else {
+				spriteBatch.setColor(Color.WHITE);
+				bullets.get(i).draw(spriteBatch);
+			}
 		}
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).draw(spriteBatch);
 		}
-		font.draw(spriteBatch, "Score: " + player.getScore(), 100, 740);
+		font.draw(spriteBatch, "Score: " + player.getScore() + "  Health: " + player.getLife(), 100, 740);
 		spriteBatch.end();
 	}
 
@@ -70,9 +79,9 @@ public class MyGame extends Game {
 			spawnTimer = 0;
 			enemies.add(new Bird(new Vector2(WINDOW_WIDTH, random.nextInt(WINDOW_HEIGHT - 45 * 4) + 45),
 					new Texture("bird.png"), 5));
-			if (random.nextInt(5)==1) {
-			enemies.add(new vapeMormon(new Vector2(WINDOW_WIDTH, random.nextInt(WINDOW_HEIGHT - 45 * 4) + 45)
-					, new Texture("vapeMormon2.png"), 5, bullets, player));
+			if (random.nextInt(5) == 1) {
+				enemies.add(new vapeMormon(new Vector2(WINDOW_WIDTH, random.nextInt(WINDOW_HEIGHT - 45 * 4) + 45),
+						new Texture("vapeMormon2.png"), 5, bullets, player));
 			}
 		}
 		for (int i = 0; i < enemies.size(); i++) {
@@ -112,6 +121,12 @@ public class MyGame extends Game {
 					bullet.isDead = true;
 				}
 
+			}
+		}
+		for (Enemy enemy : enemies) {
+			if (enemy.getHitBox().overlaps(player.getHitBox())) {
+				enemy.isDead = true;
+				player.doDamage(1);
 			}
 		}
 	}

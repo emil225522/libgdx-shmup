@@ -5,6 +5,7 @@ import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -22,6 +23,10 @@ public class Player {
 	ArrayList<Bullet> bullets;
 	Random rnd;
 	Rectangle hitBox = new Rectangle();
+	boolean isDamaged;
+	boolean blinkRed;
+	int damageTimer;
+	int blinkingTimer;
 
 	public Player(Vector2 position, Texture texture, ArrayList<Bullet> bullets) {
 		this.texture = texture;
@@ -29,7 +34,7 @@ public class Player {
 		this.bullets = bullets;
 		this.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 		this.score = 0;
-		this.life = 1000;
+		this.life = 5;
 		this.rnd = new Random();
 	}
 
@@ -48,18 +53,39 @@ public class Player {
 			if (bulletTimer > 10) {
 				bulletTimer = 0;
 				float offSet = rnd.nextFloat() - 0.5f;
-				bullets.add(new SuperBullet(new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight()/2),
-						new Texture("bullet.png"), offSet, 0,7,bullets));
+				bullets.add(new SuperBullet(
+						new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+						new Texture("bullet.png"), offSet, 0, 7, bullets));
 			}
 		}
 	}
 
 	private void updateScore() {
-		//vill göra något här sen
+		// vill göra något här sen
 		long elapsed = (System.nanoTime() - startTime) / 1000000;
 	}
 
 	private void handleMove() {
+		if (isDamaged) {
+			if (damageTimer > 100) {
+				isDamaged = false;
+				damageTimer = 0;
+				blinkingTimer = 0;
+				blinkRed = false;
+			} else {
+				damageTimer++;
+				blinkingTimer++;
+				if (blinkingTimer < 10) {
+					blinkRed = true;
+				} else if (blinkingTimer > 10 && blinkingTimer < 20) {
+					blinkRed = false;
+				} else  {
+					blinkingTimer = 0;
+					blinkRed = false;
+				}
+			}
+		}
+
 		if (Gdx.input.isKeyPressed(Keys.SPACE)) {
 			dy += dya * 0.1f;
 		} else {
@@ -79,8 +105,12 @@ public class Player {
 
 		position.y += dy;
 	}
+
 	public void doDamage(int damage) {
-		life-= damage;
+		if (isDamaged == false) {
+			life -= damage;
+			isDamaged = true;
+		}
 	}
 
 	public Vector2 getPosition() {
@@ -94,15 +124,25 @@ public class Player {
 	public Rectangle getHitBox() {
 		return hitBox;
 	}
+
 	public int getScore() {
 		return score;
 	}
-	public static void addToScore(int scoreToAdd) {
-		score+= scoreToAdd;
+	public int getLife() {
+		return life;
 	}
-	public void draw(SpriteBatch spriteBatch) {
-		spriteBatch.draw(texture, position.x, position.y);
 
+	public static void addToScore(int scoreToAdd) {
+		score += scoreToAdd;
+	}
+
+	public void draw(SpriteBatch spriteBatch) {
+		if (blinkRed) {
+			spriteBatch.setColor(Color.RED);
+			spriteBatch.draw(texture, position.x, position.y);
+			spriteBatch.setColor(Color.WHITE);
+		} else
+			spriteBatch.draw(texture, position.x, position.y);
 	}
 
 }
