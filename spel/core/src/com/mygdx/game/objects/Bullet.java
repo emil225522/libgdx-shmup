@@ -33,6 +33,9 @@ public class Bullet {
 		this.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 		position.add(dir);
 		position.add(0, offSet);
+		if(position.y <= 0 || position.y + texture.getHeight() >= MyGame.WINDOW_HEIGHT) {
+			dir.y *= -1;
+		}
 		if (position.x > 1100 || position.x < 0)
 			isDead = true;
 		

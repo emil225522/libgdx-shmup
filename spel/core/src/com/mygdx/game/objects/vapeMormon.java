@@ -28,14 +28,14 @@ public class vapeMormon extends Enemy {
 		
 		spincounter+=0.1;
 		
-		dir = new Vector2((float)Math.cos(spincounter)*2,(float)Math.sin(spincounter)*3);
+		dir = new Vector2((float)Math.cos(spincounter)*3,(float)Math.sin(spincounter)*3);
 		
 		position.add(dir);
 		
 		bulletTimer++;
 		if (bulletTimer > 100) {
 			bulletTimer = 0;
-			Vector2 shootDir = new Vector2((player.getPosition().x - this.position.x)/50,(player.getPosition().y-this.position.y)/50);
+			Vector2 shootDir = new Vector2((player.getCenter().x - this.position.x)/50,(player.getCenter().y-this.position.y)/50);
 			//double shootAngle = player.getPosition().angleRad(this.position);//this.position.angleRad(player.getPosition());
 			//float offSet = rnd.nextFloat() - 0.5f;
 			bullets.add(new EnemyBullet(new Vector2(position.x + texture.getWidth(), position.y), new Texture("bullet.png"), 0, shootDir.angleRad(), 7));

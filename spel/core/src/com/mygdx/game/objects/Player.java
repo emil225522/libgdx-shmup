@@ -45,6 +45,10 @@ public class Player {
 		handleShoot();
 
 	}
+	
+	public Vector2 getCenter() {
+		return new Vector2(this.position.x + (this.texture.getWidth()/2),this.position.y + (this.texture.getHeight()/2));
+	}
 
 	private void handleShoot() {
 		if (Gdx.input.isKeyPressed(Keys.X)) {
@@ -55,7 +59,7 @@ public class Player {
 				float offSet = rnd.nextFloat() - 0.5f;
 				bullets.add(new SuperBullet(
 						new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-						new Texture("bullet.png"), offSet, 0, 7, bullets));
+						TextureManager.BULLET_TEXTURE, offSet, 0, 7, bullets));
 			}
 		}
 	}

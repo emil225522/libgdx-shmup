@@ -20,16 +20,16 @@ import com.mygdx.game.objects.Player;*/
 import com.mygdx.game.objects.*;
 
 public class MyGame extends Game {
-	int WINDOW_WIDTH = 1000;
-	int WINDOW_HEIGHT = 750;
+	public static int WINDOW_WIDTH = 1000;
+	public static int WINDOW_HEIGHT = 750;
 	SpriteBatch spriteBatch;
 	Texture img;
 	Player player;
 	long startTime = System.nanoTime();
 	int spawnTimer = 0;
 	Random random = new Random();
-	ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-	ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	final ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	final ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 	BitmapFont font;
 
 	public GameScreen gameScreen;
@@ -43,7 +43,7 @@ public class MyGame extends Game {
 	public void create() {
 		spriteBatch = new SpriteBatch();
 		img = new Texture("alien.png");
-		player = new Player(new Vector2(20, WINDOW_HEIGHT / 2), new Texture("alien.png"), bullets);
+		player = new Player(new Vector2(20, WINDOW_HEIGHT / 2), TextureManager.ALIEN_TEXTURE, bullets);
 		font = new BitmapFont(Gdx.files.internal("fon.fnt"), false);
 	}
 
@@ -78,10 +78,10 @@ public class MyGame extends Game {
 		if (spawnTimer > 100) {
 			spawnTimer = 0;
 			enemies.add(new Bird(new Vector2(WINDOW_WIDTH, random.nextInt(WINDOW_HEIGHT - 45 * 4) + 45),
-					new Texture("bird.png"), 5));
+					TextureManager.BIRD_TEXTURE, 5));
 			if (random.nextInt(5) == 1) {
 				enemies.add(new vapeMormon(new Vector2(WINDOW_WIDTH, random.nextInt(WINDOW_HEIGHT - 45 * 4) + 45),
-						new Texture("vapeMormon2.png"), 5, bullets, player));
+						TextureManager.VAPE_MORMON_TEXTURE, 5, bullets, player));
 			}
 		}
 		for (int i = 0; i < enemies.size(); i++) {
