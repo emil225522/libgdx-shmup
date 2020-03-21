@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.MyGame;
 import com.mygdx.game.TextureManager;
 
 public class Player {
@@ -120,11 +121,11 @@ public class Player {
 		}
 	}
 
-	public void doDamage(int damage) {
+	public void doDamage(int damage, MyGame game) {
 		if (isDamaged == false) {
 			health -= damage;
 			if (health < 1)
-				System.exit(1);
+				game.reset();
 			isDamaged = true;
 		}
 	}

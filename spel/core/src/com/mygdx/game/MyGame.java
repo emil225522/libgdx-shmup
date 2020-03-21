@@ -22,14 +22,13 @@ public class MyGame extends Game {
 	public static int WINDOW_WIDTH = 1000;
 	public static int WINDOW_HEIGHT = 750;
 	SpriteBatch spriteBatch;
-	Texture img;
 	Player player;
 	long startTime = System.nanoTime();
 	Random random = new Random();
-	final ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-	final ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-	final ArrayList<Boss> bosses = new ArrayList<Boss>();
-	final ArrayList<Pickup> pickups = new ArrayList<Pickup>();
+	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	public ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	public ArrayList<Boss> bosses = new ArrayList<Boss>();
+	public ArrayList<Pickup> pickups = new ArrayList<Pickup>();
 	BitmapFont font;
 	StageHandler stageHandler;
 
@@ -43,7 +42,6 @@ public class MyGame extends Game {
 	@Override
 	public void create() {
 		spriteBatch = new SpriteBatch();
-		img = new Texture("alien.png");
 		player = new Player(new Vector2(20, WINDOW_HEIGHT / 2), TextureManager.ALIEN_TEXTURE, bullets);
 		font = new BitmapFont(Gdx.files.internal("fon.fnt"), false);
 		stageHandler = new StageHandler();
@@ -81,9 +79,7 @@ public class MyGame extends Game {
 	}
 
 	public void generalUpdate() {
-		player.update();
 		stageHandler.update(enemies, player, bullets,bosses,pickups);
-		
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).update();
 		}
@@ -100,6 +96,7 @@ public class MyGame extends Game {
 
 		handleCollision();
 		removeDead();
+		player.update();
 	}
 
 	private void removeDead() {
@@ -128,7 +125,7 @@ public class MyGame extends Game {
 	private void handleCollision() {
 		for (Bullet bullet : bullets) {
 			if (bullet.getHitBox().overlaps(player.getHitBox()) && (bullet instanceof EnemyBullet)) {
-				player.doDamage(1);
+				player.doDamage(1,this);
 				bullet.isDead = true;
 			}
 			for (Enemy enemy : enemies) {
@@ -151,7 +148,7 @@ public class MyGame extends Game {
 		for (Enemy enemy : enemies) {
 			if (enemy.getHitBox().overlaps(player.getHitBox())) {
 				enemy.isDead = true;
-				player.doDamage(1);
+				player.doDamage(1,this);
 			}
 		}
 		for (Pickup pickup : pickups) {
@@ -164,11 +161,19 @@ public class MyGame extends Game {
 			}
 		}
 	}
+	public void reset() {
+		bullets = new ArrayList<Bullet>();
+		enemies = new ArrayList<Enemy>();
+	    bosses = new ArrayList<Boss>();
+		pickups = new ArrayList<Pickup>();
+		startTime = System.nanoTime();
+		stageHandler.reset();
+		create();
+	}
 
 	@Override
 	public void dispose() {
 		spriteBatch.dispose();
-		img.dispose();
 	}
 
 }

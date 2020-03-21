@@ -12,7 +12,6 @@ public class StageHandler {
 	long startTime = System.currentTimeMillis();
 	boolean bossSpawned = false;
 	static long gameTime = 0;
-	int t = MyGame.WINDOW_WIDTH;
 
 	public void update(ArrayList<Enemy> enemies, Player player, ArrayList<Bullet> bullets, ArrayList<Boss> bosses,
 			ArrayList<Pickup> pickups) {
@@ -43,5 +42,11 @@ public class StageHandler {
 								TextureManager.SPIRIT_TEXTURE, 50, bullets, player, pickups));
 			}
 		}
+	}
+	public void reset() {
+		spawnTimer = 0;
+		startTime = System.currentTimeMillis();
+		 bossSpawned = false;
+		 gameTime = 0;
 	}
 }
