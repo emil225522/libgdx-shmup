@@ -1,7 +1,6 @@
 package com.mygdx.game;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import com.badlogic.gdx.math.Vector2;
@@ -13,9 +12,9 @@ public class StageHandler {
 	long startTime = System.currentTimeMillis();
 	static long elapsedGameTime = 0;
 
-	public void update(ArrayList<Enemy> enemies, Player player, ArrayList<Bullet> bullets) {
+	public void update(ArrayList<Enemy> enemies, Player player, ArrayList<Bullet> bullets,ArrayList<Boss> bosses) {
 		elapsedGameTime = (System.currentTimeMillis() - startTime) / 1000;
-		if (elapsedGameTime < 30) {
+		if (elapsedGameTime < 10) {
 			spawnTimer++;
 			if (spawnTimer + elapsedGameTime > 100) {
 				spawnTimer = 0;
@@ -28,6 +27,11 @@ public class StageHandler {
 							TextureManager.VAPE_MORMON_TEXTURE, 5, bullets, player));
 				}
 			}
+		}
+		else if(elapsedGameTime > 10) {
+		spawnTimer++;
+		bosses.add(new Boss(new Vector2(MyGame.WINDOW_WIDTH - 100, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
+								TextureManager.SPIRIT_TEXTURE, 50,bullets,player));
 		}
 	}
 }

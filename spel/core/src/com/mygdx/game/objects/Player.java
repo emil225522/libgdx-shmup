@@ -18,7 +18,7 @@ public class Player {
 	float dya = 2;
 	long startTime = System.nanoTime();
 	static int score;
-	int life;
+	int health;
 	int bulletTimer = 0;
 	ArrayList<Bullet> bullets;
 	Random rnd;
@@ -34,7 +34,7 @@ public class Player {
 		this.bullets = bullets;
 		this.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 		this.score = 0;
-		this.life = 5;
+		this.health = 5;
 		this.rnd = new Random();
 	}
 
@@ -116,8 +116,8 @@ public class Player {
 
 	public void doDamage(int damage) {
 		if (isDamaged == false) {
-			life -= damage;
-			if (life < 1)
+			health -= damage;
+			if (health < 1)
 				System.exit(1);
 			isDamaged = true;
 		}
@@ -140,7 +140,7 @@ public class Player {
 	}
 
 	public int getLife() {
-		return life;
+		return health;
 	}
 
 	public static void addToScore(int scoreToAdd) {

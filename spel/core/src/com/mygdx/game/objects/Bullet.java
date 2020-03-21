@@ -11,7 +11,7 @@ public class Bullet {
 	Texture texture;
 	Vector2 position;
 	float offSet;
-	Vector2 dir;
+	Vector2 direction;
 	public boolean isDead = false;
 	Rectangle hitBox = new Rectangle();
 	
@@ -20,21 +20,21 @@ public class Bullet {
 		this.texture = texture;
 		this.position = position;
 		this.offSet = offSet;
-		this.dir = new Vector2((float)Math.cos(angle)*speed,(float)Math.sin(angle)*speed);
+		this.direction = new Vector2((float)Math.cos(angle)*speed,(float)Math.sin(angle)*speed);
 	}
 	public Bullet(Vector2 position, Texture texture, float offSet, Vector2 dir) {
 		this.texture = texture;
 		this.position = position;
 		this.offSet = offSet;
-		this.dir = dir;
+		this.direction = dir;
 	}
 
 	public void update() {
 		this.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
-		position.add(dir);
+		position.add(direction);
 		position.add(0, offSet);
 		if(position.y <= 0 || position.y + texture.getHeight() >= MyGame.WINDOW_HEIGHT) {
-			dir.y *= -1;
+			direction.y *= -1;
 		}
 		if (position.x > 1100 || position.x < 0)
 			isDead = true;

@@ -6,8 +6,8 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Bird extends Enemy {
 
-	public Bird(Vector2 position, Texture texture, int life) {
-		super(position, texture, life);
+	public Bird(Vector2 position, Texture texture, int health) {
+		super(position, texture, health);
 		maxSpeed = -3;
 		velocity.x = maxSpeed;
 	}

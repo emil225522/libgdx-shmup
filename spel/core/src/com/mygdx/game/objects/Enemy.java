@@ -13,14 +13,14 @@ public abstract class Enemy {
 	public Vector2 velocity = new Vector2();
 	Rectangle hitBox = new Rectangle();
 	int maxSpeed;
-	int life = 0;
+	int health = 0;
 	public boolean isDead = false;
 	Sound sound = Gdx.audio.newSound(Gdx.files.internal("nice.mp3"));
 
-	public Enemy(Vector2 position, Texture texture, int life) {
+	public Enemy(Vector2 position, Texture texture, int health) {
 		this.texture = texture;
 		this.position = position;
-		this.life = life;
+		this.health = health;
 	}
 
 	public void update() {
@@ -30,7 +30,7 @@ public abstract class Enemy {
 		if (velocity.x > maxSpeed) {
 			velocity.x -=0.5f;
 		}
-		if (life <= 0) {
+		if (health <= 0) {
 			sound.play(0.5f);
 			isDead = true;
 			Player.addToScore(10);
@@ -48,7 +48,7 @@ public abstract class Enemy {
 		return hitBox;
 	}
 	public void doDamage(int damage) {
-		life-= damage;
+		health-= damage;
 	}
 
 }

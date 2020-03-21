@@ -28,6 +28,7 @@ public class MyGame extends Game {
 	Random random = new Random();
 	final ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	final ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+	final ArrayList<Boss> bosses = new ArrayList<Boss>();
 	BitmapFont font;
 	StageHandler stageHandler;
 
@@ -68,13 +69,16 @@ public class MyGame extends Game {
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).draw(spriteBatch);
 		}
+		for (int i = 0; i < bosses.size(); i++) {
+			bosses.get(i).draw(spriteBatch);
+		}
 		font.draw(spriteBatch, "Score: " + player.getScore() + "  Health: " + player.getLife(), 100, 740);
 		spriteBatch.end();
 	}
 
 	public void generalUpdate() {
 		player.update();
-		stageHandler.update(enemies, player, bullets);
+		stageHandler.update(enemies, player, bullets,bosses);
 		
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).update();
@@ -83,6 +87,10 @@ public class MyGame extends Game {
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).update();
 		}
+		for (int i = 0; i < bosses.size(); i++) {
+			bosses.get(i).update();
+		}
+
 		handleBulletCollision();
 		removeDead();
 	}
@@ -113,6 +121,15 @@ public class MyGame extends Game {
 					bullet.isDead = true;
 				}
 
+			}
+		}
+		for (Bullet bullet : bullets) {
+			for (Enemy boss : bosses) {
+				if (bullet.getHitBox().overlaps(boss.getHitBox()) && !(bullet instanceof EnemyBullet)) {
+					boss.velocity.x = 2;
+					boss.doDamage(1);
+					bullet.isDead = true;
+				}
 			}
 		}
 		for (Enemy enemy : enemies) {
