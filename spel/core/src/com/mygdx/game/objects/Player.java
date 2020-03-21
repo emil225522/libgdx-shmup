@@ -43,11 +43,13 @@ public class Player {
 		updateScore();
 		handleMove();
 		handleShoot();
+		handleBlink();
 
 	}
-	
+
 	public Vector2 getCenter() {
-		return new Vector2(this.position.x + (this.texture.getWidth()/2),this.position.y + (this.texture.getHeight()/2));
+		return new Vector2(this.position.x + (this.texture.getWidth() / 2),
+				this.position.y + (this.texture.getHeight() / 2));
 	}
 
 	private void handleShoot() {
@@ -70,25 +72,6 @@ public class Player {
 	}
 
 	private void handleMove() {
-		if (isDamaged) {
-			if (damageTimer > 100) {
-				isDamaged = false;
-				damageTimer = 0;
-				blinkingTimer = 0;
-				blinkRed = false;
-			} else {
-				damageTimer++;
-				blinkingTimer++;
-				if (blinkingTimer < 10) {
-					blinkRed = true;
-				} else if (blinkingTimer > 10 && blinkingTimer < 20) {
-					blinkRed = false;
-				} else  {
-					blinkingTimer = 0;
-					blinkRed = false;
-				}
-			}
-		}
 
 		if (Gdx.input.isKeyPressed(Keys.SPACE)) {
 			dy += dya * 0.1f;
@@ -108,6 +91,27 @@ public class Player {
 		}
 
 		position.y += dy;
+	}
+	private void handleBlink(){
+		if (isDamaged) {
+			if (damageTimer > 100) {
+				isDamaged = false;
+				damageTimer = 0;
+				blinkingTimer = 0;
+				blinkRed = false;
+			} else {
+				damageTimer++;
+				blinkingTimer++;
+				if (blinkingTimer < 10) {
+					blinkRed = true;
+				} else if (blinkingTimer > 10 && blinkingTimer < 20) {
+					blinkRed = false;
+				} else  {
+					blinkingTimer = 0;
+					blinkRed = false;
+				}
+			}
+		}
 	}
 
 	public void doDamage(int damage) {
@@ -134,6 +138,7 @@ public class Player {
 	public int getScore() {
 		return score;
 	}
+
 	public int getLife() {
 		return life;
 	}

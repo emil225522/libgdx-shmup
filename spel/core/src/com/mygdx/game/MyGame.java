@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 /*import com.mygdx.game.objects.Bird;
 import com.mygdx.game.objects.Bullet;
@@ -26,11 +25,11 @@ public class MyGame extends Game {
 	Texture img;
 	Player player;
 	long startTime = System.nanoTime();
-	int spawnTimer = 0;
 	Random random = new Random();
 	final ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	final ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 	BitmapFont font;
+	StageHandler stageHandler;
 
 	public GameScreen gameScreen;
 
@@ -45,6 +44,7 @@ public class MyGame extends Game {
 		img = new Texture("alien.png");
 		player = new Player(new Vector2(20, WINDOW_HEIGHT / 2), TextureManager.ALIEN_TEXTURE, bullets);
 		font = new BitmapFont(Gdx.files.internal("fon.fnt"), false);
+		stageHandler = new StageHandler();
 	}
 
 	@Override
@@ -74,16 +74,8 @@ public class MyGame extends Game {
 
 	public void generalUpdate() {
 		player.update();
-		spawnTimer++;
-		if (spawnTimer > 100) {
-			spawnTimer = 0;
-			enemies.add(new Bird(new Vector2(WINDOW_WIDTH, random.nextInt(WINDOW_HEIGHT - 45 * 4) + 45),
-					TextureManager.BIRD_TEXTURE, 5));
-			if (random.nextInt(5) == 1) {
-				enemies.add(new vapeMormon(new Vector2(WINDOW_WIDTH, random.nextInt(WINDOW_HEIGHT - 45 * 4) + 45),
-						TextureManager.VAPE_MORMON_TEXTURE, 5, bullets, player));
-			}
-		}
+		stageHandler.update(enemies, player, bullets);
+		
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).update();
 		}
