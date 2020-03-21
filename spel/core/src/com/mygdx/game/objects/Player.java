@@ -28,6 +28,7 @@ public class Player {
 	boolean blinkRed;
 	int damageTimer;
 	int blinkingTimer;
+	int shootState = 0;
 
 	public Player(Vector2 position, Texture texture, ArrayList<Bullet> bullets) {
 		this.texture = texture;
@@ -57,7 +58,7 @@ public class Player {
 		if (Gdx.input.isKeyPressed(Keys.X)) {
 
 			bulletTimer++;
-			if (bulletTimer > 10) {
+			if (bulletTimer > 10 - shootState) {
 				bulletTimer = 0;
 				float offSet = rnd.nextFloat() - 0.5f;
 				bullets.add(
@@ -144,12 +145,19 @@ public class Player {
 		return score;
 	}
 
-	public int getLife() {
+	public int getHealth() {
 		return health;
 	}
 
 	public static void addToScore(int scoreToAdd) {
 		score += scoreToAdd;
+	}
+
+	public void upgrade() {
+		shootState++;
+	}
+	public void heal() {
+		health++;
 	}
 
 	public void draw(SpriteBatch spriteBatch) {

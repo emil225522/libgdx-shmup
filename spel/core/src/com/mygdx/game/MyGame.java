@@ -29,6 +29,7 @@ public class MyGame extends Game {
 	final ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	final ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 	final ArrayList<Boss> bosses = new ArrayList<Boss>();
+	final ArrayList<Pickup> pickups = new ArrayList<Pickup>();
 	BitmapFont font;
 	StageHandler stageHandler;
 
@@ -72,13 +73,16 @@ public class MyGame extends Game {
 		for (int i = 0; i < bosses.size(); i++) {
 			bosses.get(i).draw(spriteBatch);
 		}
-		font.draw(spriteBatch, "Score: " + player.getScore() + "  Health: " + player.getLife(), 100, 740);
+		for (int i = 0; i < pickups.size(); i++) {
+			pickups.get(i).draw(spriteBatch);
+		}
+		font.draw(spriteBatch, "Score: " + player.getScore() + "  Health: " + player.getHealth(), 100, 740);
 		spriteBatch.end();
 	}
 
 	public void generalUpdate() {
 		player.update();
-		stageHandler.update(enemies, player, bullets,bosses);
+		stageHandler.update(enemies, player, bullets,bosses,pickups);
 		
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).update();
@@ -90,8 +94,11 @@ public class MyGame extends Game {
 		for (int i = 0; i < bosses.size(); i++) {
 			bosses.get(i).update();
 		}
+		for (int i = 0; i < pickups.size(); i++) {
+			pickups.get(i).update();
+		}
 
-		handleBulletCollision();
+		handleCollision();
 		removeDead();
 	}
 
@@ -111,9 +118,14 @@ public class MyGame extends Game {
 				bosses.remove(i);
 			}
 		}
+		for (int i = 0; i < pickups.size(); i++) {
+			if (pickups.get(i).isDead == true) {
+				pickups.remove(i);
+			}
+		}
 	}
 
-	private void handleBulletCollision() {
+	private void handleCollision() {
 		for (Bullet bullet : bullets) {
 			if (bullet.getHitBox().overlaps(player.getHitBox()) && (bullet instanceof EnemyBullet)) {
 				player.doDamage(1);
@@ -140,6 +152,15 @@ public class MyGame extends Game {
 			if (enemy.getHitBox().overlaps(player.getHitBox())) {
 				enemy.isDead = true;
 				player.doDamage(1);
+			}
+		}
+		for (Pickup pickup : pickups) {
+			if (pickup.getHitBox().overlaps(player.getHitBox())) {
+				pickup.isDead = true;
+				if (pickup.type == 0)
+				player.upgrade();
+				else
+					player.heal();
 			}
 		}
 	}

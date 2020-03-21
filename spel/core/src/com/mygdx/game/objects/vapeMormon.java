@@ -12,8 +12,8 @@ public class vapeMormon extends Enemy {
 	ArrayList<Bullet> bullets;
 	Player player;
 
-	public vapeMormon(Vector2 position, Texture texture, int health, ArrayList<Bullet> bullets, Player player) {
-		super(position, texture, health);
+	public vapeMormon(Vector2 position, Texture texture, int health, ArrayList<Bullet> bullets, Player player,ArrayList<Pickup> pickups) {
+		super(position, texture, health,pickups);
 		direction = new Vector2(0,0);
 		this.bullets = bullets;
 		this.player = player;

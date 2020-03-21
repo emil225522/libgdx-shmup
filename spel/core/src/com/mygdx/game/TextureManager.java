@@ -10,4 +10,6 @@ public class TextureManager {
 	public static final Texture VAPE_MORMON_TEXTURE = new Texture("vapeMormon2.png");
 	public static final Texture BIRD_TEXTURE = new Texture("bird.png");
 	public static final Texture SPIRIT_TEXTURE = new Texture("spirit.png");
+	public static final Texture PICKUP_TEXTURE = new Texture("upgrade.png");
+	public static final Texture HEART_TEXTURE = new Texture("heart.png");
 }

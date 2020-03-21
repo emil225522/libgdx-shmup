@@ -1,42 +1,70 @@
 package com.mygdx.game.objects;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.TextureManager;
 
 public abstract class Enemy {
 	Texture texture;
-	public Vector2 position;
+	Vector2 position;
 	public Vector2 velocity = new Vector2();
 	Rectangle hitBox = new Rectangle();
 	int maxSpeed;
 	int health = 0;
 	public boolean isDead = false;
-	Sound sound = Gdx.audio.newSound(Gdx.files.internal("nice.mp3"));
+	public ArrayList<Pickup> pickups;
+	Random random = new Random();
+	int maxHealth;
+	Sound enemyDeath = Gdx.audio.newSound(Gdx.files.internal("nice.mp3"));
+	Sound bossDeath = Gdx.audio.newSound(Gdx.files.internal("death.mp3"));
 
-	public Enemy(Vector2 position, Texture texture, int health) {
+	public Enemy(Vector2 position, Texture texture, int health, ArrayList<Pickup> pickups) {
 		this.texture = texture;
 		this.position = position;
 		this.health = health;
+		maxHealth = health;
+		this.pickups = pickups;
 	}
 
 	public void update() {
 		hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
-		position.x+=velocity.x;
-		position.y+=velocity.y;
-		
+		position.x += velocity.x;
+		position.y += velocity.y;
+
 		if (velocity.x > maxSpeed) {
-			velocity.x -=0.5f;
+			velocity.x -= 0.5f;
 		}
 		if (health <= 0) {
-			sound.play(0.5f);
+			enemyDeath.play(0.5f);
+			if (this instanceof Boss) {
+				bossDeath.play();
+				for (int i = 0; i < random.nextInt(4); i++) {
+
+					pickups.add(new Pickup(new Vector2(position.x + random.nextInt(50), position.y + random.nextInt(100)),
+							TextureManager.HEART_TEXTURE, 1));
+				}
+			} else {
+				enemyDeath.play();
+				if (random.nextInt(10) == 1) {
+					pickups.add(new Pickup(position,
+							TextureManager.PICKUP_TEXTURE, 0));
+				}
+
+			}
+
 			isDead = true;
-			Player.addToScore(10);
+			Player.addToScore(10 * maxHealth);
 		}
-		if ( position.x < -100) {
+		if (position.x < -100)
+
+		{
 			isDead = true;
 		}
 	}
@@ -48,8 +76,13 @@ public abstract class Enemy {
 	public Rectangle getHitBox() {
 		return hitBox;
 	}
+
 	public void doDamage(int damage) {
-		health-= damage;
+		health -= damage;
+	}
+
+	public Vector2 getPosition() {
+		return position;
 	}
 
 }

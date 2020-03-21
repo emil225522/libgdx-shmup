@@ -12,8 +12,10 @@ public class StageHandler {
 	long startTime = System.currentTimeMillis();
 	boolean bossSpawned = false;
 	static long gameTime = 0;
+	int t = MyGame.WINDOW_WIDTH;
 
-	public void update(ArrayList<Enemy> enemies, Player player, ArrayList<Bullet> bullets, ArrayList<Boss> bosses) {
+	public void update(ArrayList<Enemy> enemies, Player player, ArrayList<Bullet> bullets, ArrayList<Boss> bosses,
+			ArrayList<Pickup> pickups) {
 		gameTime = (System.currentTimeMillis() - startTime) / 1000;
 		spawnTimer++;
 		if (spawnTimer + gameTime > 100) {
@@ -21,19 +23,24 @@ public class StageHandler {
 			if (gameTime < 10) {
 				enemies.add(
 						new Bird(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
-								TextureManager.BIRD_TEXTURE, 5));
+								TextureManager.BIRD_TEXTURE, 5, pickups));
 
-			} else if (gameTime > 10 && gameTime < 20) {
+			} else if (gameTime > 10 && gameTime < 30) {
 				if (random.nextInt(5) == 1) {
 					enemies.add(new vapeMormon(
 							new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
-							TextureManager.VAPE_MORMON_TEXTURE, 5, bullets, player));
+							TextureManager.VAPE_MORMON_TEXTURE, 5, bullets, player, pickups));
 				}
-			} else if (gameTime > 1 && !bossSpawned) {
+				if (random.nextInt(3) == 1) {
+					enemies.add(new Bird(
+							new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
+							TextureManager.BIRD_TEXTURE, 5, pickups));
+				}
+			} else if (gameTime > 35 && !bossSpawned) {
 				bossSpawned = true;
-				bosses.add(new Boss(
-						new Vector2(MyGame.WINDOW_WIDTH - 100, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
-						TextureManager.SPIRIT_TEXTURE, 50, bullets, player));
+				bosses.add(
+						new Boss(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
+								TextureManager.SPIRIT_TEXTURE, 50, bullets, player, pickups));
 			}
 		}
 	}
