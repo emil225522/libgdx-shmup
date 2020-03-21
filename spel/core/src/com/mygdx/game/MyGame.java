@@ -106,25 +106,29 @@ public class MyGame extends Game {
 				enemies.remove(i);
 			}
 		}
+		for (int i = 0; i < bosses.size(); i++) {
+			if (bosses.get(i).isDead == true) {
+				bosses.remove(i);
+			}
+		}
 	}
 
 	private void handleBulletCollision() {
 		for (Bullet bullet : bullets) {
+			if (bullet.getHitBox().overlaps(player.getHitBox()) && (bullet instanceof EnemyBullet)) {
+				player.doDamage(1);
+				bullet.isDead = true;
+			}
 			for (Enemy enemy : enemies) {
 				if (bullet.getHitBox().overlaps(enemy.getHitBox()) && !(bullet instanceof EnemyBullet)) {
 					enemy.velocity.x = 2;
 					enemy.doDamage(1);
 					bullet.isDead = true;
 				}
-				if (bullet.getHitBox().overlaps(player.getHitBox()) && (bullet instanceof EnemyBullet)) {
-					player.doDamage(1);
-					bullet.isDead = true;
-				}
-
 			}
 		}
 		for (Bullet bullet : bullets) {
-			for (Enemy boss : bosses) {
+			for (Boss boss : bosses) {
 				if (bullet.getHitBox().overlaps(boss.getHitBox()) && !(bullet instanceof EnemyBullet)) {
 					boss.velocity.x = 2;
 					boss.doDamage(1);

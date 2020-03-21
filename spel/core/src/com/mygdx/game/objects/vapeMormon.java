@@ -11,7 +11,6 @@ public class vapeMormon extends Enemy {
 	private int bulletTimer = 0;
 	ArrayList<Bullet> bullets;
 	Player player;
-	//public static final int VAPEGLOBAL = 5;
 
 	public vapeMormon(Vector2 position, Texture texture, int health, ArrayList<Bullet> bullets, Player player) {
 		super(position, texture, health);
@@ -39,7 +38,7 @@ public class vapeMormon extends Enemy {
 			//double shootAngle = player.getPosition().angleRad(this.position);//this.position.angleRad(player.getPosition());
 			//float offSet = rnd.nextFloat() - 0.5f;
 			bullets.add(new EnemyBullet(new Vector2(position.x + texture.getWidth(), position.y),
-					new Texture("bullet.png"), 0, shootDir.angleRad(), 7));
+					new Texture("bullet.png"), 0, shootDir.angleRad(), 7,false));
 		}
 	}
 	//Borde snurra i draw

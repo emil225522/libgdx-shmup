@@ -10,10 +10,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.TextureManager;
 
 public class Player {
 	Texture texture;
-	Vector2 position = new Vector2();
+	static Vector2 position = new Vector2();
 	float dy = 0;
 	float dya = 2;
 	long startTime = System.nanoTime();
@@ -59,9 +60,12 @@ public class Player {
 			if (bulletTimer > 10) {
 				bulletTimer = 0;
 				float offSet = rnd.nextFloat() - 0.5f;
-				bullets.add(new SuperBullet(
-						new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-						TextureManager.BULLET_TEXTURE, offSet, 0, 7, bullets));
+				bullets.add(
+						new Bullet(new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+								TextureManager.BULLET_TEXTURE, offSet, new Vector2(7, 0)));
+//				bullets.add(new SuperBullet(
+//						new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+//						TextureManager.BULLET_TEXTURE, offSet, 0, 7, bullets));
 			}
 		}
 	}
@@ -87,12 +91,13 @@ public class Player {
 		}
 
 		if (position.y > 700 - dy || position.y < 0 - dy) {
-			dy *= -1;
+			dy *= -0.9f;
 		}
 
 		position.y += dy;
 	}
-	private void handleBlink(){
+
+	private void handleBlink() {
 		if (isDamaged) {
 			if (damageTimer > 100) {
 				isDamaged = false;
@@ -106,7 +111,7 @@ public class Player {
 					blinkRed = true;
 				} else if (blinkingTimer > 10 && blinkingTimer < 20) {
 					blinkRed = false;
-				} else  {
+				} else {
 					blinkingTimer = 0;
 					blinkRed = false;
 				}

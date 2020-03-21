@@ -26,6 +26,7 @@ public abstract class Enemy {
 	public void update() {
 		hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 		position.x+=velocity.x;
+		position.y+=velocity.y;
 		
 		if (velocity.x > maxSpeed) {
 			velocity.x -=0.5f;

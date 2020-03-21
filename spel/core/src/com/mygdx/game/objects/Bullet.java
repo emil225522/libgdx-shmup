@@ -22,11 +22,11 @@ public class Bullet {
 		this.offSet = offSet;
 		this.direction = new Vector2((float)Math.cos(angle)*speed,(float)Math.sin(angle)*speed);
 	}
-	public Bullet(Vector2 position, Texture texture, float offSet, Vector2 dir) {
+	public Bullet(Vector2 position, Texture texture, float offSet, Vector2 direction) {
 		this.texture = texture;
 		this.position = position;
 		this.offSet = offSet;
-		this.direction = dir;
+		this.direction = direction;
 	}
 
 	public void update() {
