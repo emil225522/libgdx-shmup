@@ -80,9 +80,9 @@ public class Player {
 	private void handleMove() {
 
 		if (Gdx.input.isKeyPressed(Keys.SPACE)) {
-			dy += dya * 0.1f;
+			dy += dya * 0.15f;
 		} else {
-			dy -= dya * 0.1f;
+			dy -= dya * 0.15f;
 		}
 
 		if (dy > 4) {
