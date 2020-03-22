@@ -49,7 +49,6 @@ public class MyGame extends Game {
 		font = new BitmapFont(Gdx.files.internal("fon.fnt"), false);
 		UITexture = TextureManager.UI_TEXTURE;
 		healthBarTexture = TextureManager.HEALTHBAR_TEXTURE;
-		stageHandler = new StageHandler();
 		stageHandler = new StageHandler(enemies, player, bullets, bosses, pickups);
 
 	}
@@ -84,7 +83,7 @@ public class MyGame extends Game {
 		spriteBatch.draw(UITexture, 0, 690);
 		font.draw(spriteBatch, "Score: " + player.getScore(), 400, 730);
 		font.draw(spriteBatch, "Health: ", 10, 730);
-		spriteBatch.draw(healthBarTexture, 130, 700);
+		spriteBatch.draw(healthBarTexture, 130, 700,player.getHealth()*40,healthBarTexture.getHeight());
 		spriteBatch.end();
 	}
 
