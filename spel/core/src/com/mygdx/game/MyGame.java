@@ -44,7 +44,7 @@ public class MyGame extends Game {
 		spriteBatch = new SpriteBatch();
 		player = new Player(new Vector2(20, WINDOW_HEIGHT / 2), TextureManager.ALIEN_TEXTURE, bullets);
 		font = new BitmapFont(Gdx.files.internal("fon.fnt"), false);
-		stageHandler = new StageHandler();
+		stageHandler = new StageHandler(enemies, player, bullets, bosses, pickups);
 	}
 
 	@Override
@@ -79,11 +79,10 @@ public class MyGame extends Game {
 	}
 
 	public void generalUpdate() {
-		stageHandler.update(enemies, player, bullets,bosses,pickups);
+		stageHandler.update();
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).update();
 		}
-
 		for (int i = 0; i < bullets.size(); i++) {
 			bullets.get(i).update();
 		}
