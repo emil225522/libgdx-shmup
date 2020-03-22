@@ -41,6 +41,9 @@ public class StageHandler {
 		case 3:
 			stageHandle(100, -1, -1);
 			break;
+		case 4:
+			stageHandle(10, -1, -1);
+			break;
 		}
 	}
 	public int getStage() {
@@ -67,6 +70,8 @@ public class StageHandler {
 		if (!bossSpawned) {
 			bossSpawned = true;
 			bossAdd();
+		}else if(bosses.size() == 0) {
+			stage++;
 		}
 	}
 
@@ -99,6 +104,9 @@ public class StageHandler {
 				break;
 			case 3:
 				stageThree();
+				break;
+			case 4:
+				stageTwo();
 				break;
 			}
 		}
