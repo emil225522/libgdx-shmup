@@ -56,6 +56,9 @@ public abstract class Enemy {
 					pickups.add(new Pickup(position,
 							TextureManager.PICKUP_TEXTURE, 0));
 				}
+				else if(random.nextInt(10) == 1)
+					pickups.add(new Pickup(position,
+							TextureManager.HEART_TEXTURE, 1));
 
 			}
 
