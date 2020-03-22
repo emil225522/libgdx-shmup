@@ -12,4 +12,6 @@ public class TextureManager {
 	public static final Texture SPIRIT_TEXTURE = new Texture("spirit.png");
 	public static final Texture PICKUP_TEXTURE = new Texture("upgrade.png");
 	public static final Texture HEART_TEXTURE = new Texture("heart.png");
+	public static final Texture UI_TEXTURE = new Texture("blackRectangle.png");
+	public static final Texture HEALTHBAR_TEXTURE = new Texture("redRectangle.png");
 }

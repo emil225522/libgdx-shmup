@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 /*import com.mygdx.game.objects.Bird;
 import com.mygdx.game.objects.Bullet;
@@ -22,6 +23,8 @@ public class MyGame extends Game {
 	public static int WINDOW_WIDTH = 1000;
 	public static int WINDOW_HEIGHT = 750;
 	SpriteBatch spriteBatch;
+	Texture UITexture;
+	Texture healthBarTexture;
 	Player player;
 	long startTime = System.nanoTime();
 	Random random = new Random();
@@ -44,6 +47,8 @@ public class MyGame extends Game {
 		spriteBatch = new SpriteBatch();
 		player = new Player(new Vector2(20, WINDOW_HEIGHT / 2), TextureManager.ALIEN_TEXTURE, bullets);
 		font = new BitmapFont(Gdx.files.internal("fon.fnt"), false);
+		UITexture = TextureManager.UI_TEXTURE;
+		healthBarTexture = TextureManager.HEALTHBAR_TEXTURE;
 		stageHandler = new StageHandler();
 	}
 
@@ -74,7 +79,10 @@ public class MyGame extends Game {
 		for (int i = 0; i < pickups.size(); i++) {
 			pickups.get(i).draw(spriteBatch);
 		}
-		font.draw(spriteBatch, "Score: " + player.getScore() + "  Health: " + player.getHealth(), 100, 740);
+		spriteBatch.draw(UITexture, 0, 690);
+		font.draw(spriteBatch, "Score: " + player.getScore(), 400, 730);
+		font.draw(spriteBatch, "Health: ", 10, 730);
+		spriteBatch.draw(healthBarTexture, 130, 700);
 		spriteBatch.end();
 	}
 
