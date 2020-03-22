@@ -43,26 +43,40 @@ public class StageHandler {
 			break;
 		}
 	}
+	
+	private void birdAdd() {
+		enemies.add(new Bird(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
+				TextureManager.BIRD_TEXTURE, 5, pickups));
+	}
+
+	private void vapeAdd() {
+		enemies.add(
+				new vapeMormon(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
+						TextureManager.VAPE_MORMON_TEXTURE, 5, bullets, player, pickups));
+	}
+
+	private void bossAdd() {
+		bosses.add(new Boss(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
+				TextureManager.SPIRIT_TEXTURE, 50, bullets, player, pickups));
+	}
 
 	private void stageThree() {
 		if (!bossSpawned) {
 			bossSpawned = true;
-			bosses.add(new Boss(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
-					TextureManager.SPIRIT_TEXTURE, 50, bullets, player, pickups));
+			bossAdd();
 		}
 	}
 
 	private void stageTwo() {
 		if (random.nextInt(5) == 1) {
-			enemies.add(
-					new vapeMormon(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
-							TextureManager.VAPE_MORMON_TEXTURE, 5, bullets, player, pickups));
+			vapeAdd();
 		}
 		if (random.nextInt(3) == 1) {
-			enemies.add(new Bird(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
-					TextureManager.BIRD_TEXTURE, 5, pickups));
+			birdAdd();
 		}
 	}
+
+	
 
 	private void stageOne() {
 		enemies.add(new Bird(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),

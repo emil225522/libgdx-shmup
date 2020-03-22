@@ -49,7 +49,6 @@ public class MyGame extends Game {
 		font = new BitmapFont(Gdx.files.internal("fon.fnt"), false);
 		UITexture = TextureManager.UI_TEXTURE;
 		healthBarTexture = TextureManager.HEALTHBAR_TEXTURE;
-		stageHandler = new StageHandler();
 		stageHandler = new StageHandler(enemies, player, bullets, bosses, pickups);
 
 	}
