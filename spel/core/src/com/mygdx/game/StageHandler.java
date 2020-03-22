@@ -36,12 +36,15 @@ public class StageHandler {
 			stageHandle(100, 30, 1000);
 			break;
 		case 2:
-			stageHandle(100, 60, 2000);
+			stageHandle(90, 60, 2000);
 			break;
 		case 3:
 			stageHandle(100, -1, -1);
 			break;
 		}
+	}
+	public int getStage() {
+		return this.stage;
 	}
 	
 	private void birdAdd() {
