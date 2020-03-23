@@ -57,7 +57,7 @@ public class StageHandler {
 	}
 
 	private void bossAdd() {
-		bosses.add(new Boss(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
+		bosses.add(new Spirit(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
 				TextureManager.SPIRIT_TEXTURE, 50, bullets, pickups));
 	}
 
