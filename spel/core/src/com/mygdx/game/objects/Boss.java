@@ -25,7 +25,7 @@ public abstract class Boss extends Enemy {
 		super.update();
 		if (position.x > idealPosition)
 			position.x -= 2f;
-		if (position.y + velocity.y < 0 || position.y + velocity.y > MyGame.WINDOW_HEIGHT - 110) {
+		if (position.y + velocity.y < 0 || position.y + velocity.y > MyGame.GAME_HEIGHT) {
 			velocity.y *= -1;
 		}
 		

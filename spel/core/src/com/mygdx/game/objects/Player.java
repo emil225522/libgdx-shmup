@@ -22,12 +22,12 @@ public final class Player {
 	static int health;
 	static int maxHealth;
 	static int fireRate;
-	
+
 	static long startTime = System.nanoTime();
 	static ArrayList<Bullet> bullets;
 	Random rnd;
 	static int score;
-	
+
 	static int bulletTimer = 0;
 	static boolean isDamaged;
 	static boolean blinkRed;
@@ -78,12 +78,12 @@ public final class Player {
 	}
 
 	private void updateScore() {
-		// vill göra något här sen
+		// vill gï¿½ra nï¿½got hï¿½r sen
 		long elapsed = (System.nanoTime() - startTime) / 1000000;
 	}
 
 	private void handleMove() {
-		
+
 		if (Gdx.input.isKeyPressed(Keys.SPACE)) {
 			dy += dya * 0.15f;
 		} else {
@@ -97,7 +97,8 @@ public final class Player {
 			dy = -4;
 		}
 
-		if (position.y > MyGame.WINDOW_HEIGHT - Player.texture.getHeight() - TextureManager.UI_TEXTURE.getHeight() - dy || position.y < 0 - dy) {
+		if (position.y > MyGame.WINDOW_HEIGHT - Player.texture.getHeight() - TextureManager.UI_TEXTURE.getHeight() - dy
+				|| position.y < 0 - dy) {
 			dy *= -0.9f;
 		}
 
@@ -112,7 +113,7 @@ public final class Player {
 				blinkRed = false;
 			} else {
 				damageTimer++;
-				if(damageTimer % 10 == 0) {
+				if (damageTimer % 10 == 0) {
 					blinkRed = !blinkRed;
 				}
 			}
@@ -125,7 +126,7 @@ public final class Player {
 			isDamaged = true;
 		}
 	}
-	
+
 	public static float getVelocity() {
 		return dy;
 	}
@@ -160,8 +161,11 @@ public final class Player {
 	public static void upgrade() {
 		fireRate++;
 	}
+
 	public static void heal() {
-		health++;
+		if (health < maxHealth) {
+			health++;
+		}
 	}
 
 	public void draw(SpriteBatch spriteBatch) {
