@@ -20,6 +20,7 @@ public final class Player {
 	static float dy = 0;
 	static float dya = 2;
 	static int health;
+	static int maxHealth;
 	static int fireRate;
 	
 	static long startTime = System.nanoTime();
@@ -40,7 +41,7 @@ public final class Player {
 		Player.bullets = bullets;
 		Player.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 		Player.score = 0;
-		Player.health = 5;
+		Player.health = Player.maxHealth = 5;
 		Player.fireRate = 0;
 		this.rnd = new Random();
 	}
@@ -147,6 +148,9 @@ public final class Player {
 
 	public static int getHealth() {
 		return health;
+	}
+	public static int getMaxHealth() {
+		return maxHealth;
 	}
 
 	public static void addToScore(int scoreToAdd) {

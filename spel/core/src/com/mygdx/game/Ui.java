@@ -15,9 +15,9 @@ public class Ui {
 	
 	public void draw(SpriteBatch spriteBatch) {
 		spriteBatch.draw(this.texture, 0, MyGame.WINDOW_HEIGHT - texture.getHeight());
-		spriteBatch.draw(TextureManager.HEALTHBAR_TEXTURE, 130, 700,Player.getHealth()*40,TextureManager.HEALTHBAR_TEXTURE.getHeight());
-		font.draw(spriteBatch, "Score: " + Player.getScore(), 400, 730);
-		font.draw(spriteBatch, "Stage: " + StageHandler.getStage(), 850, 730);
-		font.draw(spriteBatch, "Health: ", 10, 730);
+		spriteBatch.draw(TextureManager.HEALTHBAR_TEXTURE, 130, MyGame.WINDOW_HEIGHT - TextureManager.HEALTHBAR_TEXTURE.getHeight()-(this.texture.getHeight()-TextureManager.HEALTHBAR_TEXTURE.getHeight())/2,((float)Player.getHealth()/(float)Player.getMaxHealth())*200,TextureManager.HEALTHBAR_TEXTURE.getHeight());
+		font.draw(spriteBatch, "Score: " + Player.getScore(), 350, MyGame.WINDOW_HEIGHT - font.getXHeight());
+		font.draw(spriteBatch, "Stage: " + StageHandler.getStage(), 850, MyGame.WINDOW_HEIGHT - font.getXHeight());
+		font.draw(spriteBatch, "Health: ", 10, MyGame.WINDOW_HEIGHT - font.getXHeight());
 	}
 }
