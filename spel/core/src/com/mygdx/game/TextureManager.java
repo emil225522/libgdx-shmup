@@ -15,4 +15,5 @@ public class TextureManager {
 	public static final Texture UI_TEXTURE = new Texture("blackRectangle.png");
 	public static final Texture HEALTHBAR_TEXTURE = new Texture("redRectangle.png");
 	public static final Texture BACKGROUND_TEXTURE = new Texture("background.png");
+	public static final Texture PARTICLE_TEXTURE = new Texture("particle.png");
 }

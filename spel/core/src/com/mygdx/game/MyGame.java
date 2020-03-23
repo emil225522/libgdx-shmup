@@ -33,6 +33,7 @@ public class MyGame extends Game {
 	public ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 	public ArrayList<Boss> bosses = new ArrayList<Boss>();
 	public ArrayList<Pickup> pickups = new ArrayList<Pickup>();
+	public ArrayList<Explosion> explosions = new ArrayList<Explosion>();
 	Ui ui;
 //	BitmapFont font;
 	StageHandler stageHandler;
@@ -90,6 +91,9 @@ public class MyGame extends Game {
 		for (int i = 0; i < pickups.size(); i++) {
 			pickups.get(i).draw(spriteBatch);
 		}
+		for (int i = 0; i < explosions.size(); i++) {
+			explosions.get(i).draw(spriteBatch);
+		}
 		ui.draw(spriteBatch);
 		//spriteBatch.draw(UITexture, 0, 690);
 //		font.draw(spriteBatch, "Score: " + Player.getScore(), 400, 730);
@@ -118,6 +122,9 @@ public class MyGame extends Game {
 		for (int i = 0; i < pickups.size(); i++) {
 			pickups.get(i).update();
 		}
+		for (int i = 0; i < explosions.size(); i++) {
+			explosions.get(i).update();
+		}
 
 		handleCollision();
 		removeDead();
@@ -132,6 +139,7 @@ public class MyGame extends Game {
 		}
 		for (int i = 0; i < enemies.size(); i++) {
 			if (enemies.get(i).isDead == true) {
+				explosions.add(new Explosion(new Vector2(enemies.get(i).getPosition().x,enemies.get(i).getPosition().y),new Vector2()));
 				enemies.remove(i);
 			}
 		}
@@ -143,6 +151,11 @@ public class MyGame extends Game {
 		for (int i = 0; i < pickups.size(); i++) {
 			if (pickups.get(i).isDead == true) {
 				pickups.remove(i);
+			}
+		}
+		for (int i = 0; i < explosions.size(); i++) {
+			if (explosions.get(i).isDead == true) {
+				explosions.remove(i);
 			}
 		}
 	}
