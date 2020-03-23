@@ -63,25 +63,44 @@ public final class Player {
 	private void handleShoot() {
 		
 		if(Gdx.input.isKeyJustPressed(Keys.Z)) {
-			if(gun == 0) {
-				gun = 1;
-			}else {
-				gun = 0;
-			}
+			switchGun();
 		}
+		
 		if (Gdx.input.isKeyPressed(Keys.X)) {
-
 			bulletTimer++;
-			if (bulletTimer > (10 - fireRate)) {
-				bulletTimer = 0;
-				float offSet = rnd.nextFloat() - 0.5f;
-				bullets.add(
-						new Bullet(new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-								TextureManager.BULLET_TEXTURE, offSet, new Vector2(7, 0)));
+			if(gun == 0) {
+				if (bulletTimer > (10 - fireRate)) {
+					bulletTimer = 0;
+					float offSet = rnd.nextFloat() - 0.5f;
+					bullets.add(
+							new Bullet(new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+									TextureManager.BULLET_TEXTURE, offSet, new Vector2(8, 0)));
 //				bullets.add(new SuperBullet(
 //						new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
 //						TextureManager.BULLET_TEXTURE, offSet, 0, 7, bullets));
+				}
+				
+			}else {
+				if (bulletTimer > (6 - fireRate)) {
+					bulletTimer = 0;
+					float offSet = rnd.nextFloat() - 0.5f;
+					bullets.add(
+							new Bullet(new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+									TextureManager.BULLET_TEXTURE, offSet*5, new Vector2(4, 0)));
+//				bullets.add(new SuperBullet(
+//						new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+//						TextureManager.BULLET_TEXTURE, offSet, 0, 7, bullets));
+				}
 			}
+
+		}
+	}
+
+	private void switchGun() {
+		if(gun == 0) {
+			gun = 1;
+		}else {
+			gun = 0;
 		}
 	}
 
