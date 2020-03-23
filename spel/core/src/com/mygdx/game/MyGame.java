@@ -22,6 +22,7 @@ import com.mygdx.game.objects.*;
 public class MyGame extends Game {
 	public static int WINDOW_WIDTH = 1000;
 	public static int WINDOW_HEIGHT = 750;
+	public static int GAME_HEIGHT;
 	SpriteBatch spriteBatch;
 	Texture UITexture;
 	Texture healthBarTexture;
@@ -39,9 +40,9 @@ public class MyGame extends Game {
 
 	public GameScreen gameScreen;
 
-	public MyGame(int screenHeight, int screenWidth) {
-		WINDOW_WIDTH = screenHeight;
-		WINDOW_HEIGHT = screenWidth;
+	public MyGame(int screenWidth, int screenHeight) {
+		WINDOW_WIDTH = screenWidth;
+		WINDOW_HEIGHT = screenHeight;
 	}
 
 	@Override
@@ -54,6 +55,7 @@ public class MyGame extends Game {
 		stageHandler = new StageHandler(enemies, bullets, bosses, pickups);
 		background1 = new Background(new Vector2(),TextureManager.BACKGROUND_TEXTURE);
 		background2 = new Background(new Vector2(TextureManager.BACKGROUND_TEXTURE.getWidth(),0),TextureManager.BACKGROUND_TEXTURE);
+		GAME_HEIGHT = WINDOW_HEIGHT - TextureManager.UI_TEXTURE.getHeight()*2;
 
 	}
 
