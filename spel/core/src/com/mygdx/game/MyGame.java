@@ -24,8 +24,8 @@ public class MyGame extends Game {
 	public static int WINDOW_HEIGHT = 750;
 	public static int GAME_HEIGHT;
 	SpriteBatch spriteBatch;
-	Texture UITexture;
-	Texture healthBarTexture;
+	//Texture UITexture;
+	//Texture healthBarTexture;
 	Player player;
 	long startTime = System.nanoTime();
 	Random random = new Random();
@@ -33,7 +33,8 @@ public class MyGame extends Game {
 	public ArrayList<Enemy> enemies = new ArrayList<Enemy>();
 	public ArrayList<Boss> bosses = new ArrayList<Boss>();
 	public ArrayList<Pickup> pickups = new ArrayList<Pickup>();
-	BitmapFont font;
+	Ui ui;
+//	BitmapFont font;
 	StageHandler stageHandler;
 	Background background1;
 	Background background2;
@@ -47,11 +48,12 @@ public class MyGame extends Game {
 
 	@Override
 	public void create() {
+		ui = new Ui(TextureManager.UI_TEXTURE, new BitmapFont(Gdx.files.internal("fon.fnt"), false));
 		spriteBatch = new SpriteBatch();
 		player = new Player(new Vector2(20, WINDOW_HEIGHT / 2), TextureManager.ALIEN_TEXTURE, bullets);
-		font = new BitmapFont(Gdx.files.internal("fon.fnt"), false);
-		UITexture = TextureManager.UI_TEXTURE;
-		healthBarTexture = TextureManager.HEALTHBAR_TEXTURE;
+		//font = new BitmapFont(Gdx.files.internal("fon.fnt"), false);
+		//UITexture = TextureManager.UI_TEXTURE;
+		//healthBarTexture = TextureManager.HEALTHBAR_TEXTURE;
 		stageHandler = new StageHandler(enemies, bullets, bosses, pickups);
 		background1 = new Background(new Vector2(),TextureManager.BACKGROUND_TEXTURE);
 		background2 = new Background(new Vector2(TextureManager.BACKGROUND_TEXTURE.getWidth(),0),TextureManager.BACKGROUND_TEXTURE);
@@ -88,12 +90,12 @@ public class MyGame extends Game {
 		for (int i = 0; i < pickups.size(); i++) {
 			pickups.get(i).draw(spriteBatch);
 		}
-
-		spriteBatch.draw(UITexture, 0, 690);
-		font.draw(spriteBatch, "Score: " + Player.getScore(), 400, 730);
-		font.draw(spriteBatch, "Stage: " + stageHandler.getStage(), 850, 730);
-		font.draw(spriteBatch, "Health: ", 10, 730);
-		spriteBatch.draw(healthBarTexture, 130, 700,Player.getHealth()*40,healthBarTexture.getHeight());
+		ui.draw(spriteBatch);
+		//spriteBatch.draw(UITexture, 0, 690);
+//		font.draw(spriteBatch, "Score: " + Player.getScore(), 400, 730);
+//		font.draw(spriteBatch, "Stage: " + stageHandler.getStage(), 850, 730);
+//		font.draw(spriteBatch, "Health: ", 10, 730);
+//		spriteBatch.draw(healthBarTexture, 130, 700,Player.getHealth()*40,healthBarTexture.getHeight());
 		spriteBatch.end();
 	}
 

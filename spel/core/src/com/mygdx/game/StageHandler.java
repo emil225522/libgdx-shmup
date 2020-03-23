@@ -10,7 +10,7 @@ public class StageHandler {
 	int spawnTimer = 0;
 	long startTime = System.currentTimeMillis();
 	boolean bossSpawned = false;
-	int stage = 1;
+	static int stage = 1;
 	static long gameTime = 0;
 
 	ArrayList<Enemy> enemies;
@@ -44,8 +44,8 @@ public class StageHandler {
 		}
 	}
 
-	public int getStage() {
-		return this.stage;
+	public static int getStage() {
+		return stage;
 	}
 
 	private void birdAdd() {

@@ -32,6 +32,8 @@ public final class Player {
 	static boolean isDamaged;
 	static boolean blinkRed;
 	static int damageTimer;
+	
+	int gun = 0;
 
 	public Player(Vector2 position, Texture texture, ArrayList<Bullet> bullets) {
 		Player.texture = texture;
