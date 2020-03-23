@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.MyGame;
 import com.mygdx.game.TextureManager;
 
 public abstract class Enemy {
@@ -86,6 +87,9 @@ public abstract class Enemy {
 
 	public Vector2 getPosition() {
 		return position;
+	}
+	public static int getSpawnPosY() {
+		return random.nextInt(MyGame.WINDOW_HEIGHT - TextureManager.ALIEN_TEXTURE.getHeight()*3) + TextureManager.ALIEN_TEXTURE.getHeight();
 	}
 
 }

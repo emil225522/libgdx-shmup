@@ -15,7 +15,7 @@ public class Bird extends Enemy {
 		velocity.x = maxSpeed;
 	}
 	public Bird(Texture texture, ArrayList<Pickup> pickups) {
-		super(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45), texture, 5, pickups);
+		super(new Vector2(MyGame.WINDOW_WIDTH, getSpawnPosY()), texture, 5, pickups);
 		maxSpeed = -3;
 		velocity.x = maxSpeed;
 	}

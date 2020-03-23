@@ -22,7 +22,7 @@ public class vapeMormon extends Enemy {
 		velocity.x = maxSpeed;
 	}
 	public vapeMormon(Texture texture, ArrayList<Bullet> bullets, Player player,ArrayList<Pickup> pickups) {
-		super(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45), texture, 5,pickups);
+		super(new Vector2(MyGame.WINDOW_WIDTH, getSpawnPosY()), texture, 5,pickups);
 		direction = new Vector2(0,0);
 		this.bullets = bullets;
 		this.player = player;
