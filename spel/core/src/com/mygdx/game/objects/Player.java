@@ -13,36 +13,37 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.TextureManager;
 
-public class Player {
-	Texture texture;
+public final class Player {
+	static Texture texture;
 	static Vector2 position = new Vector2();
-	float dy = 0;
-	float dya = 2;
-	long startTime = System.nanoTime();
-	static int score;
-	int health;
-	int bulletTimer = 0;
-	ArrayList<Bullet> bullets;
+	static Rectangle hitBox = new Rectangle();
+	static float dy = 0;
+	static float dya = 2;
+	static int health;
+	static int fireRate = 0;
+	
+	static long startTime = System.nanoTime();
+	static ArrayList<Bullet> bullets;
 	Random rnd;
-	Rectangle hitBox = new Rectangle();
-	boolean isDamaged;
-	boolean blinkRed;
-	int damageTimer;
-	int blinkingTimer;
-	int shootState = 0;
+	static int score;
+	
+	static int bulletTimer = 0;
+	static boolean isDamaged;
+	static boolean blinkRed;
+	static int damageTimer;
 
 	public Player(Vector2 position, Texture texture, ArrayList<Bullet> bullets) {
-		this.texture = texture;
-		this.position = position;
-		this.bullets = bullets;
-		this.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
-		this.score = 0;
-		this.health = 5;
+		Player.texture = texture;
+		Player.position = position;
+		Player.bullets = bullets;
+		Player.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
+		Player.score = 0;
+		Player.health = 5;
 		this.rnd = new Random();
 	}
 
 	public void update() {
-		this.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
+		Player.hitBox.set(position.x, position.y, texture.getWidth(), texture.getHeight());
 		updateScore();
 		handleMove();
 		handleShoot();
@@ -50,16 +51,16 @@ public class Player {
 
 	}
 
-	public Vector2 getCenter() {
-		return new Vector2(this.position.x + (this.texture.getWidth() / 2),
-				this.position.y + (this.texture.getHeight() / 2));
+	public static Vector2 getCenter() {
+		return new Vector2(Player.position.x + (Player.texture.getWidth() / 2),
+				Player.position.y + (Player.texture.getHeight() / 2));
 	}
 
 	private void handleShoot() {
 		if (Gdx.input.isKeyPressed(Keys.X)) {
 
 			bulletTimer++;
-			if (bulletTimer > 10 - shootState) {
+			if (bulletTimer > (10 - fireRate)) {
 				bulletTimer = 0;
 				float offSet = rnd.nextFloat() - 0.5f;
 				bullets.add(
@@ -78,7 +79,7 @@ public class Player {
 	}
 
 	private void handleMove() {
-
+		
 		if (Gdx.input.isKeyPressed(Keys.SPACE)) {
 			dy += dya * 0.15f;
 		} else {
@@ -92,7 +93,7 @@ public class Player {
 			dy = -4;
 		}
 
-		if (position.y > 630 - dy || position.y < 0 - dy) {
+		if (position.y > MyGame.WINDOW_HEIGHT - Player.texture.getHeight() - TextureManager.UI_TEXTURE.getHeight() - dy || position.y < 0 - dy) {
 			dy *= -0.9f;
 		}
 
@@ -104,49 +105,40 @@ public class Player {
 			if (damageTimer > 100) {
 				isDamaged = false;
 				damageTimer = 0;
-				blinkingTimer = 0;
 				blinkRed = false;
 			} else {
 				damageTimer++;
-				blinkingTimer++;
-				if (blinkingTimer < 10) {
-					blinkRed = true;
-				} else if (blinkingTimer > 10 && blinkingTimer < 20) {
-					blinkRed = false;
-				} else {
-					blinkingTimer = 0;
-					blinkRed = false;
+				if(damageTimer % 10 == 0) {
+					blinkRed = !blinkRed;
 				}
 			}
 		}
 	}
 
-	public void doDamage(int damage, MyGame game) {
+	public static void doDamage(int damage) {
 		if (isDamaged == false) {
 			health -= damage;
-			if (health < 1)
-				game.reset();
 			isDamaged = true;
 		}
 	}
 
-	public Vector2 getPosition() {
+	public static Vector2 getPosition() {
 		return position;
 	}
 
-	public Texture getTexture() {
+	public static Texture getTexture() {
 		return texture;
 	}
 
-	public Rectangle getHitBox() {
+	public static Rectangle getHitBox() {
 		return hitBox;
 	}
 
-	public int getScore() {
+	public static int getScore() {
 		return score;
 	}
 
-	public int getHealth() {
+	public static int getHealth() {
 		return health;
 	}
 
@@ -154,10 +146,10 @@ public class Player {
 		score += scoreToAdd;
 	}
 
-	public void upgrade() {
-		shootState++;
+	public static void upgrade() {
+		fireRate++;
 	}
-	public void heal() {
+	public static void heal() {
 		health++;
 	}
 
