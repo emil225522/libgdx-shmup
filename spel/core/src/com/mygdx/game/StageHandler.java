@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.function.Consumer;
 
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.objects.*;
@@ -33,16 +34,16 @@ public class StageHandler {
 		gameTime = (System.currentTimeMillis() - startTime) / 1000;
 		switch (stage) {
 		case 1:
-			stageHandle(100, 30, 1000);
+			stageHandle(stageOne, 100, 30, 1000);
 			break;
 		case 2:
-			stageHandle(90, 60, 2000);
+			stageHandle(stageTwo, 90, 60, 2000);
 			break;
 		case 3:
-			stageHandle(100, -1, -1);
+			stageHandle(stageThree, 100, -1, -1);
 			break;
 		case 4:
-			stageHandle(10, -1, -1);
+			stageHandle(stageTwo, 10, -1, -1);
 			break;
 		}
 	}
@@ -66,49 +67,35 @@ public class StageHandler {
 				TextureManager.SPIRIT_TEXTURE, 50, bullets, player, pickups));
 	}
 
-	private void stageThree() {
+	
+	Consumer<Integer> stagefour = i ->{
+		//spawn here
+	};
+	Consumer<Integer> stageThree = i ->{
 		if (!bossSpawned) {
 			bossSpawned = true;
 			bossAdd();
 		}else if(bosses.size() == 0) {
 			stage++;
 		}
-	}
-
-	private void stageTwo() {
+	};
+	Consumer<Integer> stageTwo = i ->{
 		if (random.nextInt(5) == 1) {
 			vapeAdd();
 		}
 		if (random.nextInt(3) == 1) {
 			birdAdd();
 		}
-	}
+	};
+	Consumer<Integer> stageOne = i ->{
+		birdAdd();
+	};
 
-	
-
-	private void stageOne() {
-		enemies.add(new Bird(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
-				TextureManager.BIRD_TEXTURE, 5, pickups));
-	}
-
-	private void stageHandle(int spawnRate, long stageTime, int scoreLimit) {
+	private void stageHandle(Consumer<Integer> spawnFunction,int spawnRate, long stageTime, int scoreLimit) {
 		spawnTimer++;
 		if (spawnTimer >= spawnRate) {
 			spawnTimer = 0;
-			switch (stage) {
-			case 1:
-				stageOne();
-				break;
-			case 2:
-				stageTwo();
-				break;
-			case 3:
-				stageThree();
-				break;
-			case 4:
-				stageTwo();
-				break;
-			}
+			spawnFunction.accept(0);
 		}
 		if (gameTime > stageTime && stageTime > 0) {
 			stage++;
