@@ -87,9 +87,12 @@ public final class Player {
 					bullets.add(
 							new Bullet(new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
 									TextureManager.BULLET_TEXTURE, offSet*5, new Vector2(4, 0)));
-//				bullets.add(new SuperBullet(
-//						new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-//						TextureManager.BULLET_TEXTURE, offSet, 0, 7, bullets));
+					if(rnd.nextInt(1000) > 990) {
+				bullets.add(new SuperBullet(
+						new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+						TextureManager.BULLET_TEXTURE, offSet, 0, 7, bullets));
+						
+					}
 				}
 			}
 
