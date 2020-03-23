@@ -33,7 +33,7 @@ public final class Player {
 	static boolean blinkRed;
 	static int damageTimer;
 	
-	int gun = 0;
+	static int gun = 0;
 
 	public Player(Vector2 position, Texture texture, ArrayList<Bullet> bullets) {
 		Player.texture = texture;
@@ -61,6 +61,14 @@ public final class Player {
 	}
 
 	private void handleShoot() {
+		
+		if(Gdx.input.isKeyJustPressed(Keys.Z)) {
+			if(gun == 0) {
+				gun = 1;
+			}else {
+				gun = 0;
+			}
+		}
 		if (Gdx.input.isKeyPressed(Keys.X)) {
 
 			bulletTimer++;
@@ -175,6 +183,10 @@ public final class Player {
 			spriteBatch.setColor(Color.WHITE);
 		} else
 			spriteBatch.draw(texture, position.x, position.y);
+	}
+
+	public static int getGun() {
+		return gun;
 	}
 
 }
