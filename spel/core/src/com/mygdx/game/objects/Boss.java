@@ -29,7 +29,7 @@ public class Boss extends Enemy {
 		super.update();
 		if (position.x > idealPosition)
 			position.x -= 2f;
-		if (position.y + velocity.y < 0 || position.y + velocity.y > MyGame.WINDOW_HEIGHT - 50) {
+		if (position.y + velocity.y < 0 || position.y + velocity.y > MyGame.WINDOW_HEIGHT - 110) {
 			velocity.y *= -1;
 		}
 		if (state == 0) {
