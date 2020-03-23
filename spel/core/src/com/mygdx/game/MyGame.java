@@ -34,6 +34,8 @@ public class MyGame extends Game {
 	public ArrayList<Pickup> pickups = new ArrayList<Pickup>();
 	BitmapFont font;
 	StageHandler stageHandler;
+	Background background1;
+	Background background2;
 
 	public GameScreen gameScreen;
 
@@ -50,6 +52,8 @@ public class MyGame extends Game {
 		UITexture = TextureManager.UI_TEXTURE;
 		healthBarTexture = TextureManager.HEALTHBAR_TEXTURE;
 		stageHandler = new StageHandler(enemies, player, bullets, bosses, pickups);
+		background1 = new Background(new Vector2(),TextureManager.BACKGROUND_TEXTURE);
+		background2 = new Background(new Vector2(TextureManager.BACKGROUND_TEXTURE.getWidth(),0),TextureManager.BACKGROUND_TEXTURE);
 
 	}
 
@@ -59,6 +63,8 @@ public class MyGame extends Game {
 		Gdx.gl.glClearColor(0, 0.5f, 1, 0.8f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		spriteBatch.begin();
+		background1.draw(spriteBatch);
+		background2.draw(spriteBatch);
 		player.draw(spriteBatch);
 		for (int i = 0; i < bullets.size(); i++) {
 
@@ -80,6 +86,7 @@ public class MyGame extends Game {
 		for (int i = 0; i < pickups.size(); i++) {
 			pickups.get(i).draw(spriteBatch);
 		}
+
 		spriteBatch.draw(UITexture, 0, 690);
 		font.draw(spriteBatch, "Score: " + player.getScore(), 400, 730);
 		font.draw(spriteBatch, "Stage: " + stageHandler.getStage(), 850, 730);
@@ -90,6 +97,8 @@ public class MyGame extends Game {
 
 	public void generalUpdate() {
 		stageHandler.update();
+		background1.update();
+		background2.update();
 		for (int i = 0; i < enemies.size(); i++) {
 			enemies.get(i).update();
 		}
