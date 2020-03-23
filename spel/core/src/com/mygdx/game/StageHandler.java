@@ -47,19 +47,17 @@ public class StageHandler {
 			break;
 		}
 	}
+
 	public int getStage() {
 		return this.stage;
 	}
-	
+
 	private void birdAdd() {
-		enemies.add(new Bird(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
-				TextureManager.BIRD_TEXTURE, 5, pickups));
+		enemies.add(new Bird(TextureManager.BIRD_TEXTURE, pickups));
 	}
 
 	private void vapeAdd() {
-		enemies.add(
-				new vapeMormon(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
-						TextureManager.VAPE_MORMON_TEXTURE, 5, bullets, player, pickups));
+		enemies.add(new vapeMormon(TextureManager.VAPE_MORMON_TEXTURE, bullets, player, pickups));
 	}
 
 	private void bossAdd() {
@@ -67,19 +65,18 @@ public class StageHandler {
 				TextureManager.SPIRIT_TEXTURE, 50, bullets, player, pickups));
 	}
 
-	
-	Runnable stagefour = () ->{
-		//spawn here
+	Runnable stagefour = () -> {
+		// spawn here
 	};
-	Runnable stageThree = () ->{
+	Runnable stageThree = () -> {
 		if (!bossSpawned) {
 			bossSpawned = true;
 			bossAdd();
-		}else if(bosses.size() == 0) {
+		} else if (bosses.size() == 0) {
 			stage++;
 		}
 	};
-	Runnable stageTwo = () ->{
+	Runnable stageTwo = () -> {
 		if (random.nextInt(5) == 1) {
 			vapeAdd();
 		}
@@ -87,12 +84,11 @@ public class StageHandler {
 			birdAdd();
 		}
 	};
-	Runnable stageOne = () ->{
+	Runnable stageOne = () -> {
 		birdAdd();
 	};
-	
 
-	private void stageHandle(Runnable spawnFunction,int spawnRate, long stageTime, int scoreLimit) {
+	private void stageHandle(Runnable spawnFunction, int spawnRate, long stageTime, int scoreLimit) {
 		spawnTimer++;
 		if (spawnTimer >= spawnRate) {
 			spawnTimer = 0;

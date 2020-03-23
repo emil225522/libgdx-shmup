@@ -22,7 +22,6 @@ public class Boss extends Enemy {
 		this.bullets = bullets;
 		this.player = player;
 		velocity.y = 2;
-		// TODO Auto-generated constructor stub
 	}
 
 	public void update() {

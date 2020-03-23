@@ -20,7 +20,7 @@ public abstract class Enemy {
 	int health = 0;
 	public boolean isDead = false;
 	public ArrayList<Pickup> pickups;
-	Random random = new Random();
+	static Random random = new Random();
 	int maxHealth;
 	Sound enemyDeath = Gdx.audio.newSound(Gdx.files.internal("nice.mp3"));
 	Sound bossDeath = Gdx.audio.newSound(Gdx.files.internal("death.mp3"));

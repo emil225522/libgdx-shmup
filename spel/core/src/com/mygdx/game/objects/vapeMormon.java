@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.MyGame;
 
 public class vapeMormon extends Enemy {
 	Vector2 direction;
@@ -14,6 +15,14 @@ public class vapeMormon extends Enemy {
 
 	public vapeMormon(Vector2 position, Texture texture, int health, ArrayList<Bullet> bullets, Player player,ArrayList<Pickup> pickups) {
 		super(position, texture, health,pickups);
+		direction = new Vector2(0,0);
+		this.bullets = bullets;
+		this.player = player;
+		maxSpeed = -3;
+		velocity.x = maxSpeed;
+	}
+	public vapeMormon(Texture texture, ArrayList<Bullet> bullets, Player player,ArrayList<Pickup> pickups) {
+		super(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45), texture, 5,pickups);
 		direction = new Vector2(0,0);
 		this.bullets = bullets;
 		this.player = player;
