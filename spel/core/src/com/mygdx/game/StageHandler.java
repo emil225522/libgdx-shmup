@@ -68,10 +68,10 @@ public class StageHandler {
 	}
 
 	
-	Consumer<Integer> stagefour = i ->{
+	Runnable stagefour = () ->{
 		//spawn here
 	};
-	Consumer<Integer> stageThree = i ->{
+	Runnable stageThree = () ->{
 		if (!bossSpawned) {
 			bossSpawned = true;
 			bossAdd();
@@ -79,7 +79,7 @@ public class StageHandler {
 			stage++;
 		}
 	};
-	Consumer<Integer> stageTwo = i ->{
+	Runnable stageTwo = () ->{
 		if (random.nextInt(5) == 1) {
 			vapeAdd();
 		}
@@ -87,15 +87,16 @@ public class StageHandler {
 			birdAdd();
 		}
 	};
-	Consumer<Integer> stageOne = i ->{
+	Runnable stageOne = () ->{
 		birdAdd();
 	};
+	
 
-	private void stageHandle(Consumer<Integer> spawnFunction,int spawnRate, long stageTime, int scoreLimit) {
+	private void stageHandle(Runnable spawnFunction,int spawnRate, long stageTime, int scoreLimit) {
 		spawnTimer++;
 		if (spawnTimer >= spawnRate) {
 			spawnTimer = 0;
-			spawnFunction.accept(0);
+			spawnFunction.run();
 		}
 		if (gameTime > stageTime && stageTime > 0) {
 			stage++;
