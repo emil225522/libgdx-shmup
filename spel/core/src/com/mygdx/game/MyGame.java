@@ -96,6 +96,9 @@ public class MyGame extends Game {
 	}
 
 	public void generalUpdate() {
+		if (player.getHealth() < 1) {
+			reset();
+		}
 		stageHandler.update();
 		background1.update();
 		background2.update();
@@ -143,7 +146,7 @@ public class MyGame extends Game {
 	private void handleCollision() {
 		for (Bullet bullet : bullets) {
 			if (bullet.getHitBox().overlaps(player.getHitBox()) && (bullet instanceof EnemyBullet)) {
-				player.doDamage(1,this);
+				player.doDamage(1);
 				bullet.isDead = true;
 			}
 			for (Enemy enemy : enemies) {
@@ -166,7 +169,7 @@ public class MyGame extends Game {
 		for (Enemy enemy : enemies) {
 			if (enemy.getHitBox().overlaps(player.getHitBox())) {
 				enemy.isDead = true;
-				player.doDamage(1,this);
+				player.doDamage(1);
 			}
 		}
 		for (Pickup pickup : pickups) {
