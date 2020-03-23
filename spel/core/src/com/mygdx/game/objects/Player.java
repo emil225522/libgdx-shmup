@@ -20,7 +20,7 @@ public final class Player {
 	static float dy = 0;
 	static float dya = 2;
 	static int health;
-	static int fireRate = 0;
+	static int fireRate;
 	
 	static long startTime = System.nanoTime();
 	static ArrayList<Bullet> bullets;
@@ -39,6 +39,7 @@ public final class Player {
 		Player.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 		Player.score = 0;
 		Player.health = 5;
+		Player.fireRate = 0;
 		this.rnd = new Random();
 	}
 
