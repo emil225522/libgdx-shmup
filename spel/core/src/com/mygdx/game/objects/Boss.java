@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGame;
 import com.mygdx.game.TextureManager;
 
-public class Boss extends Enemy {
+public abstract class Boss extends Enemy {
 	int bulletTimer;
 	ArrayList<Bullet> bullets;
 	int idealPosition = MyGame.WINDOW_WIDTH - 150;
@@ -28,44 +28,7 @@ public class Boss extends Enemy {
 		if (position.y + velocity.y < 0 || position.y + velocity.y > MyGame.WINDOW_HEIGHT - 110) {
 			velocity.y *= -1;
 		}
-		if (state == 0) {
-			Vector2 shootDir = new Vector2((Player.getCenter().x - this.position.x) / 50,
-					((Player.getCenter().y - this.position.y) + playerVelOffset) / 60);
-			bulletTimer++;
-			if (bulletTimer == 100) {
-				if (Math.abs(Player.getVelocity()) < 4)
-					playerVelOffset = Player.getVelocity() * 50;
-				bullets.add(new EnemyBullet(
-						new Vector2(position.x + texture.getWidth() / 2, position.y + texture.getHeight() / 2),
-						TextureManager.BULLET_TEXTURE, 0, shootDir, true));
-
-			} else if (bulletTimer > 200) {
-				bulletTimer = 0;
-				for (int i = -1; i < 2; i++) {
-					shootDir.scl(0.7f);
-					bullets.add(new EnemyBullet(
-							new Vector2(position.x + texture.getWidth() / 2, position.y + texture.getHeight() / 2),
-							TextureManager.BULLET_TEXTURE, 0, new Vector2(-9, i * 2), false));
-				}
-			}
-			if (health < 20) {
-				state = 1;
-			}
-		} else if (state == 1) {
-			velocity.y *= 2;
-			idealPosition -= 100;
-			state = 2;
-		} else if (state == 2) {
-			bulletTimer++;
-			if (bulletTimer > 50) {
-				bulletTimer = 0;
-				for (int i = -1; i < 2; i++) {
-					bullets.add(new EnemyBullet(
-							new Vector2(position.x + texture.getWidth() / 2, position.y + texture.getHeight() / 2),
-							TextureManager.BULLET_TEXTURE, 0, new Vector2(-10, i * 2), false));
-				}
-			}
-		}
+		
 
 	}
 
