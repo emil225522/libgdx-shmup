@@ -11,16 +11,13 @@ import com.mygdx.game.TextureManager;
 public class Boss extends Enemy {
 	int bulletTimer;
 	ArrayList<Bullet> bullets;
-	Player player;
 	int idealPosition = MyGame.WINDOW_WIDTH - 150;
 	float playerVelOffset;
 	int state = 0;
 
-	public Boss(Vector2 position, Texture texture, int health, ArrayList<Bullet> bullets, Player player,
-			ArrayList<Pickup> pickups) {
+	public Boss(Vector2 position, Texture texture, int health, ArrayList<Bullet> bullets, ArrayList<Pickup> pickups) {
 		super(position, texture, health, pickups);
 		this.bullets = bullets;
-		this.player = player;
 		velocity.y = 2;
 	}
 
@@ -32,12 +29,12 @@ public class Boss extends Enemy {
 			velocity.y *= -1;
 		}
 		if (state == 0) {
-			Vector2 shootDir = new Vector2((player.getCenter().x - this.position.x) / 50,
-					((player.getCenter().y - this.position.y) + playerVelOffset) / 60);
+			Vector2 shootDir = new Vector2((Player.getCenter().x - this.position.x) / 50,
+					((Player.getCenter().y - this.position.y) + playerVelOffset) / 60);
 			bulletTimer++;
 			if (bulletTimer == 100) {
-				if (Math.abs(player.dy) < 4)
-					playerVelOffset = player.dy * 50;
+				if (Math.abs(Player.getVelocity()) < 4)
+					playerVelOffset = Player.getVelocity() * 50;
 				bullets.add(new EnemyBullet(
 						new Vector2(position.x + texture.getWidth() / 2, position.y + texture.getHeight() / 2),
 						TextureManager.BULLET_TEXTURE, 0, shootDir, true));
@@ -54,13 +51,11 @@ public class Boss extends Enemy {
 			if (health < 20) {
 				state = 1;
 			}
-		}
-		else if (state == 1) {
-			velocity.y*=2;
+		} else if (state == 1) {
+			velocity.y *= 2;
 			idealPosition -= 100;
 			state = 2;
-		}
-		else if (state == 2) {
+		} else if (state == 2) {
 			bulletTimer++;
 			if (bulletTimer > 50) {
 				bulletTimer = 0;
@@ -71,7 +66,7 @@ public class Boss extends Enemy {
 				}
 			}
 		}
-		
+
 	}
 
 	public void draw(SpriteBatch spriteBatch) {

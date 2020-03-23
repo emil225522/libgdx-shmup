@@ -121,6 +121,10 @@ public final class Player {
 			isDamaged = true;
 		}
 	}
+	
+	public static float getVelocity() {
+		return dy;
+	}
 
 	public static Vector2 getPosition() {
 		return position;

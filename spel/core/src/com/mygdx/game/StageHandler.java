@@ -2,8 +2,6 @@ package com.mygdx.game;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.function.Consumer;
-
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.objects.*;
 
@@ -16,15 +14,13 @@ public class StageHandler {
 	static long gameTime = 0;
 
 	ArrayList<Enemy> enemies;
-	Player player;
 	ArrayList<Bullet> bullets;
 	ArrayList<Boss> bosses;
 	ArrayList<Pickup> pickups;
 
-	public StageHandler(ArrayList<Enemy> enemies, Player player, ArrayList<Bullet> bullets, ArrayList<Boss> bosses,
+	public StageHandler(ArrayList<Enemy> enemies, ArrayList<Bullet> bullets, ArrayList<Boss> bosses,
 			ArrayList<Pickup> pickups) {
 		this.enemies = enemies;
-		this.player = player;
 		this.bullets = bullets;
 		this.bosses = bosses;
 		this.pickups = pickups;
@@ -57,12 +53,12 @@ public class StageHandler {
 	}
 
 	private void vapeAdd() {
-		enemies.add(new vapeMormon(TextureManager.VAPE_MORMON_TEXTURE, bullets, player, pickups));
+		enemies.add(new vapeMormon(TextureManager.VAPE_MORMON_TEXTURE, bullets, pickups));
 	}
 
 	private void bossAdd() {
 		bosses.add(new Boss(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
-				TextureManager.SPIRIT_TEXTURE, 50, bullets, player, pickups));
+				TextureManager.SPIRIT_TEXTURE, 50, bullets, pickups));
 	}
 
 	Runnable stagefour = () -> {
@@ -97,7 +93,7 @@ public class StageHandler {
 		if (gameTime > stageTime && stageTime > 0) {
 			stage++;
 		}
-		if (player.getScore() > scoreLimit && scoreLimit > 0) {
+		if (Player.getScore() > scoreLimit && scoreLimit > 0) {
 			stage++;
 		}
 	}

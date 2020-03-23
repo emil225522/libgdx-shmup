@@ -11,21 +11,18 @@ public class vapeMormon extends Enemy {
 	double spincounter = 0;
 	private int bulletTimer = 0;
 	ArrayList<Bullet> bullets;
-	Player player;
 
-	public vapeMormon(Vector2 position, Texture texture, int health, ArrayList<Bullet> bullets, Player player,ArrayList<Pickup> pickups) {
+	public vapeMormon(Vector2 position, Texture texture, int health, ArrayList<Bullet> bullets, ArrayList<Pickup> pickups) {
 		super(position, texture, health,pickups);
 		direction = new Vector2(0,0);
 		this.bullets = bullets;
-		this.player = player;
 		maxSpeed = -3;
 		velocity.x = maxSpeed;
 	}
-	public vapeMormon(Texture texture, ArrayList<Bullet> bullets, Player player,ArrayList<Pickup> pickups) {
+	public vapeMormon(Texture texture, ArrayList<Bullet> bullets,ArrayList<Pickup> pickups) {
 		super(new Vector2(MyGame.WINDOW_WIDTH, getSpawnPosY()), texture, 5,pickups);
 		direction = new Vector2(0,0);
 		this.bullets = bullets;
-		this.player = player;
 		maxSpeed = -3;
 		velocity.x = maxSpeed;
 	}
@@ -43,7 +40,7 @@ public class vapeMormon extends Enemy {
 		bulletTimer++;
 		if (bulletTimer > 100) {
 			bulletTimer = 0;
-			Vector2 shootDir = new Vector2((player.getCenter().x - this.position.x)/50,(player.getCenter().y-this.position.y)/50);
+			Vector2 shootDir = new Vector2((Player.getCenter().x - this.position.x)/50,(Player.getCenter().y-this.position.y)/50);
 			//double shootAngle = player.getPosition().angleRad(this.position);//this.position.angleRad(player.getPosition());
 			//float offSet = rnd.nextFloat() - 0.5f;
 			bullets.add(new EnemyBullet(new Vector2(position.x + texture.getWidth(), position.y),

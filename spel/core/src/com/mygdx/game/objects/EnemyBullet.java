@@ -9,7 +9,6 @@ public class EnemyBullet extends Bullet {
 	public EnemyBullet(Vector2 position, Texture texture, float offSet, double angle,int speed, boolean homing) {
 		super(position, texture, offSet, angle, speed);
 		this.homing = homing;
-		// TODO Auto-generated constructor stub
 	}
 	public EnemyBullet(Vector2 position, Texture texture, float offSet, Vector2 direction, boolean homing) {
 		super(position, texture, offSet, direction);

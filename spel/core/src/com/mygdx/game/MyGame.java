@@ -51,7 +51,7 @@ public class MyGame extends Game {
 		font = new BitmapFont(Gdx.files.internal("fon.fnt"), false);
 		UITexture = TextureManager.UI_TEXTURE;
 		healthBarTexture = TextureManager.HEALTHBAR_TEXTURE;
-		stageHandler = new StageHandler(enemies, player, bullets, bosses, pickups);
+		stageHandler = new StageHandler(enemies, bullets, bosses, pickups);
 		background1 = new Background(new Vector2(),TextureManager.BACKGROUND_TEXTURE);
 		background2 = new Background(new Vector2(TextureManager.BACKGROUND_TEXTURE.getWidth(),0),TextureManager.BACKGROUND_TEXTURE);
 
@@ -88,15 +88,15 @@ public class MyGame extends Game {
 		}
 
 		spriteBatch.draw(UITexture, 0, 690);
-		font.draw(spriteBatch, "Score: " + player.getScore(), 400, 730);
+		font.draw(spriteBatch, "Score: " + Player.getScore(), 400, 730);
 		font.draw(spriteBatch, "Stage: " + stageHandler.getStage(), 850, 730);
 		font.draw(spriteBatch, "Health: ", 10, 730);
-		spriteBatch.draw(healthBarTexture, 130, 700,player.getHealth()*40,healthBarTexture.getHeight());
+		spriteBatch.draw(healthBarTexture, 130, 700,Player.getHealth()*40,healthBarTexture.getHeight());
 		spriteBatch.end();
 	}
 
 	public void generalUpdate() {
-		if (player.getHealth() < 1) {
+		if (Player.getHealth() < 1) {
 			reset();
 		}
 		stageHandler.update();
@@ -145,8 +145,8 @@ public class MyGame extends Game {
 
 	private void handleCollision() {
 		for (Bullet bullet : bullets) {
-			if (bullet.getHitBox().overlaps(player.getHitBox()) && (bullet instanceof EnemyBullet)) {
-				player.doDamage(1);
+			if (bullet.getHitBox().overlaps(Player.getHitBox()) && (bullet instanceof EnemyBullet)) {
+				Player.doDamage(1);
 				bullet.isDead = true;
 			}
 			for (Enemy enemy : enemies) {
@@ -167,18 +167,18 @@ public class MyGame extends Game {
 			}
 		}
 		for (Enemy enemy : enemies) {
-			if (enemy.getHitBox().overlaps(player.getHitBox())) {
+			if (enemy.getHitBox().overlaps(Player.getHitBox())) {
 				enemy.isDead = true;
-				player.doDamage(1);
+				Player.doDamage(1);
 			}
 		}
 		for (Pickup pickup : pickups) {
-			if (pickup.getHitBox().overlaps(player.getHitBox())) {
+			if (pickup.getHitBox().overlaps(Player.getHitBox())) {
 				pickup.isDead = true;
 				if (pickup.type == 0)
-				player.upgrade();
+				Player.upgrade();
 				else
-					player.heal();
+					Player.heal();
 			}
 		}
 	}
