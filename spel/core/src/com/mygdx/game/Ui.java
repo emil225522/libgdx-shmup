@@ -21,7 +21,15 @@ public class Ui {
 						- (this.texture.getHeight() - TextureManager.HEALTHBAR_TEXTURE.getHeight()) / 2,
 				((float) Player.getHealth() / (float) Player.getMaxHealth()) * 200,
 				TextureManager.HEALTHBAR_TEXTURE.getHeight());
-		font.draw(spriteBatch, "Score: " + Player.getScore(), 350, MyGame.WINDOW_HEIGHT - font.getXHeight());
+		
+		spriteBatch.draw(TextureManager.GUN_SELECTOR_TEXTURE, 350, 
+				MyGame.WINDOW_HEIGHT - TextureManager.GUN_SELECTOR_TEXTURE.getHeight()
+				- (this.texture.getHeight() - TextureManager.GUN_SELECTOR_TEXTURE.getHeight()) / 2);
+		spriteBatch.draw(TextureManager.GUN_SELECTOR_FRAME_TEXTURE, 350 + (50 * Player.getGun()), 
+				MyGame.WINDOW_HEIGHT - TextureManager.GUN_SELECTOR_FRAME_TEXTURE.getHeight()
+				- (this.texture.getHeight() - TextureManager.GUN_SELECTOR_FRAME_TEXTURE.getHeight()) / 2);
+		
+		font.draw(spriteBatch, "Score: " + Player.getScore(), 450, MyGame.WINDOW_HEIGHT - font.getXHeight());
 		font.draw(spriteBatch, "Stage: " + StageHandler.getStage(), 850, MyGame.WINDOW_HEIGHT - font.getXHeight());
 		font.draw(spriteBatch, "Health: ", 10, MyGame.WINDOW_HEIGHT - font.getXHeight());
 	}
