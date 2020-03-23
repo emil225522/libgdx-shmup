@@ -24,6 +24,7 @@ public class StageHandler {
 		this.bullets = bullets;
 		this.bosses = bosses;
 		this.pickups = pickups;
+		stage = 1;
 	}
 
 	public void update() {
