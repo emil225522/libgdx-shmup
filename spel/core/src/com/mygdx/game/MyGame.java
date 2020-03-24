@@ -52,13 +52,10 @@ public class MyGame extends Game {
 		ui = new Ui(TextureManager.UI_TEXTURE, new BitmapFont(Gdx.files.internal("fon.fnt"), false));
 		spriteBatch = new SpriteBatch();
 		player = new Player(new Vector2(20, WINDOW_HEIGHT / 2), TextureManager.ALIEN_TEXTURE, bullets);
-		//font = new BitmapFont(Gdx.files.internal("fon.fnt"), false);
-		//UITexture = TextureManager.UI_TEXTURE;
-		//healthBarTexture = TextureManager.HEALTHBAR_TEXTURE;
 		stageHandler = new StageHandler(enemies, bullets, bosses, pickups);
 		background1 = new Background(new Vector2(),TextureManager.BACKGROUND_TEXTURE);
 		background2 = new Background(new Vector2(TextureManager.BACKGROUND_TEXTURE.getWidth(),0),TextureManager.BACKGROUND_TEXTURE);
-		GAME_HEIGHT = WINDOW_HEIGHT - TextureManager.UI_TEXTURE.getHeight()*2;
+		GAME_HEIGHT = WINDOW_HEIGHT - TextureManager.UI_TEXTURE.getHeight();
 
 	}
 
@@ -187,10 +184,12 @@ public class MyGame extends Game {
 		for (Pickup pickup : pickups) {
 			if (pickup.getHitBox().overlaps(Player.getHitBox())) {
 				pickup.isDead = true;
-				if (pickup.type == 0)
-				Player.upgrade();
-				else
+				if (pickup.type == 0){
+					Player.upgrade();
+				}
+				else {
 					Player.heal();
+				}
 			}
 		}
 	}
