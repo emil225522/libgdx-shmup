@@ -40,7 +40,10 @@ public class StageHandler {
 			stageHandle(stageThree, 100, -1, -1);
 			break;
 		case 4:
-			stageHandle(stageTwo, 20, -1, -1);
+			stageHandle(stageTwo, 20, -1, 10000);
+			break;
+		case 5:
+			stageHandle(stageFive, 20, -1, -1);
 			break;
 		}
 	}
@@ -61,7 +64,26 @@ public class StageHandler {
 		bosses.add(new Spirit(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
 				TextureManager.SPIRIT_TEXTURE, 50, bullets, pickups));
 	}
-
+	
+	Runnable stageFive = () -> {
+		if (!bossSpawned) {
+			bossSpawned = true;
+			bossAdd();
+			bossAdd();
+			bossAdd();
+		} else if (bosses.size() == 0) {
+			stage++;
+			bossSpawned =  false;
+		}
+		if(random.nextInt(100) > 90) {
+			if (random.nextInt(5) == 1) {
+				crowAdd();
+			}
+			if (random.nextInt(3) == 1) {
+				birdAdd();
+			}
+		}
+	};
 	Runnable stagefour = () -> {
 		// spawn here
 	};
@@ -71,6 +93,7 @@ public class StageHandler {
 			bossAdd();
 		} else if (bosses.size() == 0) {
 			stage++;
+			bossSpawned =  false;
 		}
 	};
 	Runnable stageTwo = () -> {

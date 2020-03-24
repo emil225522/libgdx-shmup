@@ -66,7 +66,7 @@ public abstract class Enemy {
 			isDead = true;
 			Player.addToScore(10 * maxHealth);
 		}
-		if (position.x < -100)
+		if (position.x < -texture.getWidth())
 
 		{
 			isDead = true;
