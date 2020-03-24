@@ -40,7 +40,7 @@ public class StageHandler {
 			stageHandle(stageThree, 100, -1, -1);
 			break;
 		case 4:
-			stageHandle(stageTwo, 10, -1, -1);
+			stageHandle(stageTwo, 20, -1, -1);
 			break;
 		}
 	}
@@ -53,8 +53,8 @@ public class StageHandler {
 		enemies.add(new Bird(TextureManager.BIRD_TEXTURE, pickups));
 	}
 
-	private void vapeAdd() {
-		enemies.add(new vapeMormon(TextureManager.VAPE_MORMON_TEXTURE, bullets, pickups));
+	private void crowAdd() {
+		enemies.add(new Crow(TextureManager.CROW_TEXTURE, bullets, pickups));
 	}
 
 	private void bossAdd() {
@@ -75,7 +75,7 @@ public class StageHandler {
 	};
 	Runnable stageTwo = () -> {
 		if (random.nextInt(5) == 1) {
-			vapeAdd();
+			crowAdd();
 		}
 		if (random.nextInt(3) == 1) {
 			birdAdd();

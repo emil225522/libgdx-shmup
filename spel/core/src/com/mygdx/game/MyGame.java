@@ -95,11 +95,6 @@ public class MyGame extends Game {
 			explosions.get(i).draw(spriteBatch);
 		}
 		ui.draw(spriteBatch);
-		//spriteBatch.draw(UITexture, 0, 690);
-//		font.draw(spriteBatch, "Score: " + Player.getScore(), 400, 730);
-//		font.draw(spriteBatch, "Stage: " + stageHandler.getStage(), 850, 730);
-//		font.draw(spriteBatch, "Health: ", 10, 730);
-//		spriteBatch.draw(healthBarTexture, 130, 700,Player.getHealth()*40,healthBarTexture.getHeight());
 		spriteBatch.end();
 	}
 
