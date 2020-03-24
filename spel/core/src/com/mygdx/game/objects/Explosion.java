@@ -43,7 +43,9 @@ public class Explosion {
 
 	public void draw(SpriteBatch spriteBatch) {
 		for (int i = 0; i < particles.size(); i++) {
-			particles.get(i).draw(spriteBatch);
+			if(!particles.get(i).isDead) {
+				particles.get(i).draw(spriteBatch);				
+			}
 		}
 	}
 }

@@ -43,6 +43,7 @@ public final class Player {
 		Player.score = 0;
 		Player.health = Player.maxHealth = 5;
 		Player.fireRate = 0;
+		Player.gun = 0;
 		this.rnd = new Random();
 	}
 
