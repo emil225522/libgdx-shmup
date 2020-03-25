@@ -31,6 +31,9 @@ public class Ui {
 		
 		font.draw(spriteBatch, "Score: " + Player.getScore(), 450, MyGame.WINDOW_HEIGHT - font.getXHeight());
 		font.draw(spriteBatch, "Stage: " + StageHandler.getStage(), 850, MyGame.WINDOW_HEIGHT - font.getXHeight());
+		font.draw(spriteBatch, "FireRate: " + Player.getFireRate(), 650, MyGame.WINDOW_HEIGHT - font.getXHeight());
+		font.draw(spriteBatch, "FireDelay1: " + (30f / (Math.log(((double)Player.getFireRate())*Math.E))), 650, MyGame.WINDOW_HEIGHT - font.getXHeight() - 50);
+		font.draw(spriteBatch, "FireDelay2: " + (30f * (1f/Player.getFireRate())), 650, MyGame.WINDOW_HEIGHT - font.getXHeight() - 100);
 		font.draw(spriteBatch, "Health: ", 10, MyGame.WINDOW_HEIGHT - font.getXHeight());
 	}
 }

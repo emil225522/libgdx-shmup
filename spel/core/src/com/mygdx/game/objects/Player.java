@@ -34,6 +34,7 @@ public final class Player {
 	static int damageTimer;
 	
 	static int gun = 0;
+	static int damage = 1;
 
 	public Player(Vector2 position, Texture texture, ArrayList<Bullet> bullets) {
 		Player.texture = texture;
@@ -44,6 +45,7 @@ public final class Player {
 		Player.health = Player.maxHealth = 5;
 		Player.fireRate = 1;
 		Player.gun = 0;
+		Player.damage = 1;
 		this.rnd = new Random();
 	}
 
@@ -70,11 +72,11 @@ public final class Player {
 		if (Gdx.input.isKeyPressed(Keys.X)) {
 			bulletTimer++;
 			if(gun == 0) {
-				if (bulletTimer > (30f * (1f/fireRate))) {
+				if (bulletTimer > (30f / (Math.log(((double)fireRate)*Math.E)))) {
 					bulletTimer = 0;
 					float offSet = rnd.nextFloat() - 0.5f;
 					bullets.add(
-							new Bullet(2,new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+							new Bullet(2*damage,new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
 									TextureManager.BULLET_TEXTURE, offSet, new Vector2(8, 0)));
 				}
 				
@@ -83,11 +85,11 @@ public final class Player {
 					bulletTimer = 0;
 					float offSet = rnd.nextFloat() - 0.5f;
 					bullets.add(
-							new Bullet(1, new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+							new Bullet(damage, new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
 									TextureManager.BULLET_TEXTURE, (rnd.nextFloat() - 0.5f)*5, new Vector2(4, 0)));
 					
 					bullets.add(
-							new Bullet(1, new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+							new Bullet(damage, new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
 									TextureManager.BULLET_TEXTURE, (rnd.nextFloat() - 0.5f)*5, new Vector2(4, 0)));
 					
 					if(rnd.nextInt(1000) > 990) {
@@ -185,6 +187,9 @@ public final class Player {
 	}
 	public static int getMaxHealth() {
 		return maxHealth;
+	}
+	public static int getFireRate() {
+		return fireRate;
 	}
 
 	public static void addToScore(int scoreToAdd) {
