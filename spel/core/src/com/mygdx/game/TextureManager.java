@@ -7,6 +7,7 @@ public class TextureManager {
 	
 	public static final Texture BULLET_TEXTURE = new Texture("bullet.png");
 	public static final Texture ALIEN_TEXTURE = new Texture("alien.png");
+	public static final Texture PET_TEXTURE = new Texture("Kotten.png");
 	public static final Texture CROW_TEXTURE = new Texture("crow-sprite.png");
 	public static final Texture BIRD_TEXTURE = new Texture("bird.png");
 	public static final Texture SPIRIT_TEXTURE = new Texture("spirit.png");

@@ -27,6 +27,7 @@ public class MyGame extends Game {
 	//Texture UITexture;
 	//Texture healthBarTexture;
 	Player player;
+	Pet kotten;
 	long startTime = System.nanoTime();
 	Random random = new Random();
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
@@ -52,6 +53,7 @@ public class MyGame extends Game {
 		ui = new Ui(TextureManager.UI_TEXTURE, new BitmapFont(Gdx.files.internal("fon.fnt"), false));
 		spriteBatch = new SpriteBatch();
 		player = new Player(new Vector2(20, WINDOW_HEIGHT / 2), TextureManager.ALIEN_TEXTURE, bullets);
+		kotten = new Pet();
 		stageHandler = new StageHandler(enemies, bullets, bosses, pickups);
 		background1 = new Background(new Vector2(),TextureManager.BACKGROUND_TEXTURE);
 		background2 = new Background(new Vector2(TextureManager.BACKGROUND_TEXTURE.getWidth(),0),TextureManager.BACKGROUND_TEXTURE);
@@ -68,6 +70,7 @@ public class MyGame extends Game {
 		background1.draw(spriteBatch);
 		background2.draw(spriteBatch);
 		player.draw(spriteBatch);
+		kotten.draw(spriteBatch);
 		for (int i = 0; i < bullets.size(); i++) {
 
 			if (bullets.get(i) instanceof EnemyBullet) {
@@ -121,6 +124,7 @@ public class MyGame extends Game {
 		handleCollision();
 		removeDead();
 		player.update();
+		kotten.update();
 	}
 
 	private void removeDead() {

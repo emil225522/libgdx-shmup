@@ -14,10 +14,12 @@ public abstract class Boss extends Enemy {
 	int idealPosition = MyGame.WINDOW_WIDTH - 150;
 	float playerVelOffset;
 	int state = 0;
+	Texture texture;
 
 	public Boss(Vector2 position, Texture texture, int health, ArrayList<Bullet> bullets, ArrayList<Pickup> pickups) {
 		super(position, texture, health, pickups);
 		this.bullets = bullets;
+		this.texture = texture;
 		velocity.y = 2;
 	}
 
@@ -25,7 +27,7 @@ public abstract class Boss extends Enemy {
 		super.update();
 		if (position.x > idealPosition)
 			position.x -= 2f;
-		if (position.y + velocity.y < 0 || position.y + velocity.y > MyGame.GAME_HEIGHT) {
+		if (position.y + velocity.y < 0 || position.y + texture.getHeight() + velocity.y > MyGame.GAME_HEIGHT) {
 			velocity.y *= -1;
 		}
 		
