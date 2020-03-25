@@ -43,7 +43,7 @@ public class Crow extends Enemy {
 			Vector2 shootDir = new Vector2((Player.getCenter().x - this.position.x)/50,(Player.getCenter().y-this.position.y)/50);
 			//double shootAngle = player.getPosition().angleRad(this.position);//this.position.angleRad(player.getPosition());
 			//float offSet = rnd.nextFloat() - 0.5f;
-			bullets.add(new EnemyBullet(new Vector2(position.x, position.y),
+			bullets.add(new EnemyBullet(1, new Vector2(position.x, position.y),
 					new Texture("bullet.png"), 0, shootDir.angleRad(), 7,false));
 		}
 	}

@@ -155,26 +155,33 @@ public class MyGame extends Game {
 	private void handleCollision() {
 		for (Bullet bullet : bullets) {
 			if (bullet.getHitBox().overlaps(Player.getHitBox()) && (bullet instanceof EnemyBullet)) {
-				Player.doDamage(1);
+				Player.doDamage(bullet.getDamage());
 				bullet.isDead = true;
 			}
 			for (Enemy enemy : enemies) {
 				if (bullet.getHitBox().overlaps(enemy.getHitBox()) && !(bullet instanceof EnemyBullet)) {
 					enemy.velocity.x = 2;
-					enemy.doDamage(1);
+					enemy.doDamage(bullet.getDamage());
 					bullet.isDead = true;
 				}
 			}
-		}
-		for (Bullet bullet : bullets) {
 			for (Boss boss : bosses) {
 				if (bullet.getHitBox().overlaps(boss.getHitBox()) && !(bullet instanceof EnemyBullet)) {
 					boss.velocity.x = 2;
-					boss.doDamage(1);
+					boss.doDamage(bullet.getDamage());
 					bullet.isDead = true;
 				}
 			}
 		}
+//		for (Bullet bullet : bullets) {
+//			for (Boss boss : bosses) {
+//				if (bullet.getHitBox().overlaps(boss.getHitBox()) && !(bullet instanceof EnemyBullet)) {
+//					boss.velocity.x = 2;
+//					boss.doDamage(bullet.getDamage());
+//					bullet.isDead = true;
+//				}
+//			}
+//		}
 		for (Enemy enemy : enemies) {
 			if (enemy.getHitBox().overlaps(Player.getHitBox())) {
 				enemy.isDead = true;

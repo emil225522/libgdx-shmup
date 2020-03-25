@@ -42,7 +42,7 @@ public final class Player {
 		Player.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 		Player.score = 0;
 		Player.health = Player.maxHealth = 5;
-		Player.fireRate = 0;
+		Player.fireRate = 1;
 		Player.gun = 0;
 		this.rnd = new Random();
 	}
@@ -70,26 +70,28 @@ public final class Player {
 		if (Gdx.input.isKeyPressed(Keys.X)) {
 			bulletTimer++;
 			if(gun == 0) {
-				if (bulletTimer > (10 - fireRate)) {
+				if (bulletTimer > (30f * (1f/fireRate))) {
 					bulletTimer = 0;
 					float offSet = rnd.nextFloat() - 0.5f;
 					bullets.add(
-							new Bullet(new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+							new Bullet(2,new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
 									TextureManager.BULLET_TEXTURE, offSet, new Vector2(8, 0)));
-//				bullets.add(new SuperBullet(
-//						new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-//						TextureManager.BULLET_TEXTURE, offSet, 0, 7, bullets));
 				}
 				
 			}else {
-				if (bulletTimer > (6 - fireRate)) {
+				if (bulletTimer > (30f * (1f/fireRate))) {
 					bulletTimer = 0;
 					float offSet = rnd.nextFloat() - 0.5f;
 					bullets.add(
-							new Bullet(new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-									TextureManager.BULLET_TEXTURE, offSet*5, new Vector2(4, 0)));
+							new Bullet(1, new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+									TextureManager.BULLET_TEXTURE, (rnd.nextFloat() - 0.5f)*5, new Vector2(4, 0)));
+					
+					bullets.add(
+							new Bullet(1, new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+									TextureManager.BULLET_TEXTURE, (rnd.nextFloat() - 0.5f)*5, new Vector2(4, 0)));
+					
 					if(rnd.nextInt(1000) > 990) {
-				bullets.add(new SuperBullet(
+				bullets.add(new SuperBullet(5,
 						new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
 						TextureManager.BULLET_TEXTURE, offSet, 0, 7, bullets));
 						

@@ -12,8 +12,8 @@ public class SuperBullet extends Bullet {
 	Random rnd;
 	ArrayList<Bullet> bullets;
 
-	public SuperBullet(Vector2 position, Texture texture, float offSet, double angle, int speed, ArrayList<Bullet> bullets) {
-		super(position, texture, offSet, angle, speed);
+	public SuperBullet(int damage, Vector2 position, Texture texture, float offSet, double angle, int speed, ArrayList<Bullet> bullets) {
+		super(damage, position, texture, offSet, angle, speed);
 		
 		this.bullets = bullets;
 		rnd = new Random();
@@ -25,7 +25,7 @@ public class SuperBullet extends Bullet {
 			//bullets.add(new Bullet(new Vector2(this.position),this.texture,0,-Math.PI/4,7));
 			//bullets.add(new Bullet(new Vector2(this.position),this.texture,0,Math.PI/4,7));
 			for(double i = 0; i < Math.PI*2; i += Math.PI/6) {
-				bullets.add(new Bullet(new Vector2(this.position),this.texture,0,i,7));
+				bullets.add(new Bullet(1, new Vector2(this.position),this.texture,0,i,7));
 			}
 			super.isDead=true;
 		}

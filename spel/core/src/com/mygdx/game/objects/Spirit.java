@@ -11,7 +11,6 @@ public class Spirit extends Boss {
 
 	public Spirit(Vector2 position, Texture texture, int health, ArrayList<Bullet> bullets, ArrayList<Pickup> pickups) {
 		super(position, texture, health, bullets, pickups);
-		// TODO Auto-generated constructor stub
 	}
 
 	public void update() {
@@ -24,7 +23,7 @@ public class Spirit extends Boss {
 			if (bulletTimer == 100) {
 				if (Math.abs(Player.getVelocity()) < 4)
 					playerVelOffset = Player.getVelocity() * 50;
-				bullets.add(new EnemyBullet(
+				bullets.add(new EnemyBullet(1,
 						new Vector2(position.x + texture.getWidth() / 2, position.y + texture.getHeight() / 2),
 						TextureManager.BULLET_TEXTURE, 0, shootDir, true));
 
@@ -32,7 +31,7 @@ public class Spirit extends Boss {
 				bulletTimer = 0;
 				for (int i = -1; i < 2; i++) {
 					shootDir.scl(0.7f);
-					bullets.add(new EnemyBullet(
+					bullets.add(new EnemyBullet(1,
 							new Vector2(position.x + texture.getWidth() / 2, position.y + texture.getHeight() / 2),
 							TextureManager.BULLET_TEXTURE, 0, new Vector2(-9, i * 2), false));
 				}
@@ -51,7 +50,7 @@ public class Spirit extends Boss {
 			if (bulletTimer > 50) {
 				bulletTimer = 0;
 				for (int i = -1; i < 2; i++) {
-					bullets.add(new EnemyBullet(
+					bullets.add(new EnemyBullet(1, 
 							new Vector2(position.x + texture.getWidth() / 2, position.y + texture.getHeight() / 2),
 							TextureManager.BULLET_TEXTURE, 0, new Vector2(-10, i * 2), false));
 				}

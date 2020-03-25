@@ -6,12 +6,12 @@ import com.badlogic.gdx.math.Vector2;
 public class EnemyBullet extends Bullet {
 	boolean homing;
 	
-	public EnemyBullet(Vector2 position, Texture texture, float offSet, double angle,int speed, boolean homing) {
-		super(position, texture, offSet, angle, speed);
+	public EnemyBullet(int damage, Vector2 position, Texture texture, float offSet, double angle,int speed, boolean homing) {
+		super(damage, position, texture, offSet, angle, speed);
 		this.homing = homing;
 	}
-	public EnemyBullet(Vector2 position, Texture texture, float offSet, Vector2 direction, boolean homing) {
-		super(position, texture, offSet, direction);
+	public EnemyBullet(int damage, Vector2 position, Texture texture, float offSet, Vector2 direction, boolean homing) {
+		super(damage, position, texture, offSet, direction);
 		this.homing = homing;
 	}
 	public void update() {

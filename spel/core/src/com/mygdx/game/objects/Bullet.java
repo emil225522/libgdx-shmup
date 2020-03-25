@@ -14,15 +14,18 @@ public class Bullet {
 	Vector2 direction;
 	public boolean isDead = false;
 	Rectangle hitBox = new Rectangle();
+	int damage;
 	
 //angle in radians
-	public Bullet(Vector2 position, Texture texture, float offSet,double angle, int speed) {
+	public Bullet(int damage, Vector2 position, Texture texture, float offSet,double angle, int speed) {
+		this.damage = damage;
 		this.texture = texture;
 		this.position = position;
 		this.offSet = offSet;
 		this.direction = new Vector2((float)Math.cos(angle)*speed,(float)Math.sin(angle)*speed);
 	}
-	public Bullet(Vector2 position, Texture texture, float offSet, Vector2 direction) {
+	public Bullet(int damage, Vector2 position, Texture texture, float offSet, Vector2 direction) {
+		this.damage = damage;
 		this.texture = texture;
 		this.position = position;
 		this.offSet = offSet;
@@ -41,6 +44,9 @@ public class Bullet {
 			isDead = true;
 		}
 		
+	}
+	public int getDamage() {
+		return this.damage;
 	}
 
 	public void draw(SpriteBatch spriteBatch) {
