@@ -14,6 +14,7 @@ public class TextureManager {
 	public static final Texture HEART_TEXTURE = new Texture("heart.png");
 	public static final Texture UI_TEXTURE = new Texture("blackRectangle.png");
 	public static final Texture HEALTHBAR_TEXTURE = new Texture("redRectangle.png");
+	public static final Texture SHEILD_TEXTURE = new Texture("blueRectangle.png");
 	public static final Texture BACKGROUND_TEXTURE = new Texture("background.png");
 	public static final Texture PARTICLE_TEXTURE = new Texture("particle.png");
 	public static final Texture GUN_SELECTOR_TEXTURE = new Texture("gunSelector.png");

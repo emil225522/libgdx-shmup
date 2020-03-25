@@ -21,20 +21,24 @@ public final class Player {
 	static float dya = 2;
 	static int health;
 	static int maxHealth;
-	static int fireRate;
+	static int shield = 0;
+	static int maxShield = 0;
+	static int shieldTimer = 0;
 
 	static long startTime = System.nanoTime();
 	static ArrayList<Bullet> bullets;
 	Random rnd;
 	static int score;
 
-	static int bulletTimer = 0;
+	static int bulletTimer;
 	static boolean isDamaged;
 	static boolean blinkRed;
 	static int damageTimer;
 	
+	static int fireRate;
 	static int gun = 0;
 	static int damage = 1;
+	
 
 	public Player(Vector2 position, Texture texture, ArrayList<Bullet> bullets) {
 		Player.texture = texture;
@@ -43,6 +47,8 @@ public final class Player {
 		Player.hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 		Player.score = 0;
 		Player.health = Player.maxHealth = 5;
+		Player.shield = Player.maxShield = 0;
+		Player.shieldTimer = Player.bulletTimer = 0;
 		Player.fireRate = 1;
 		Player.gun = 0;
 		Player.damage = 1;
@@ -55,7 +61,19 @@ public final class Player {
 		handleMove();
 		handleShoot();
 		handleBlink();
+		handleShield();
 
+	}
+
+	private void handleShield() {
+		if(shieldTimer == 0) {
+			if(shield < maxShield) {
+				shield++;
+			}
+		}else {
+			shieldTimer--;
+		}
+		
 	}
 
 	public static Vector2 getCenter() {
@@ -157,7 +175,14 @@ public final class Player {
 
 	public static void doDamage(int damage) {
 		if (isDamaged == false) {
-			health -= damage;
+			if (damage <= shield) {
+				shield -= damage;
+			}else {
+				damage -= shield;
+				shield = 0;
+				health -= damage;
+			}
+			shieldTimer = 600;
 			isDamaged = true;
 		}
 	}
@@ -188,6 +213,12 @@ public final class Player {
 	public static int getMaxHealth() {
 		return maxHealth;
 	}
+	public static int getShield() {
+		return shield;
+	}
+	public static int getMaxShield() {
+		return maxShield;
+	}
 	public static int getFireRate() {
 		return fireRate;
 	}
@@ -217,6 +248,11 @@ public final class Player {
 
 	public static int getGun() {
 		return gun;
+	}
+
+	public static void setMaxShield(int newShieldValue) {
+		maxShield = newShieldValue;
+		
 	}
 
 }

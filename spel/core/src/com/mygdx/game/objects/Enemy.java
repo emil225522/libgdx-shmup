@@ -89,7 +89,7 @@ public abstract class Enemy {
 		return position;
 	}
 	public static int getSpawnPosY() {
-		return random.nextInt(MyGame.WINDOW_HEIGHT - TextureManager.ALIEN_TEXTURE.getHeight()*3) + TextureManager.ALIEN_TEXTURE.getHeight();
+		return random.nextInt(MyGame.GAME_HEIGHT - TextureManager.ALIEN_TEXTURE.getHeight()*2) + TextureManager.ALIEN_TEXTURE.getHeight();
 	}
 
 }

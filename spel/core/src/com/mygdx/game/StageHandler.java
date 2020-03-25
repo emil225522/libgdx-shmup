@@ -94,6 +94,7 @@ public class StageHandler {
 		} else if (bosses.size() == 0) {
 			stage++;
 			bossSpawned =  false;
+			Player.setMaxShield(Player.getMaxShield()+1);
 		}
 	};
 	Runnable stageTwo = () -> {

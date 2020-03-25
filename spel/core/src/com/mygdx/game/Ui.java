@@ -22,6 +22,14 @@ public class Ui {
 				((float) Player.getHealth() / (float) Player.getMaxHealth()) * 200,
 				TextureManager.HEALTHBAR_TEXTURE.getHeight());
 		
+		if(Player.getMaxShield() > 0) {
+			spriteBatch.draw(TextureManager.SHEILD_TEXTURE, 130,
+					MyGame.WINDOW_HEIGHT - TextureManager.SHEILD_TEXTURE.getHeight()
+					- (this.texture.getHeight() - TextureManager.SHEILD_TEXTURE.getHeight()) / 2,
+					((float) Player.getShield() / (float) Player.getMaxShield()) * 200,
+					TextureManager.SHEILD_TEXTURE.getHeight());			
+		}
+		
 		spriteBatch.draw(TextureManager.GUN_SELECTOR_TEXTURE, 350, 
 				MyGame.WINDOW_HEIGHT - TextureManager.GUN_SELECTOR_TEXTURE.getHeight()
 				- (this.texture.getHeight() - TextureManager.GUN_SELECTOR_TEXTURE.getHeight()) / 2);
