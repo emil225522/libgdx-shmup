@@ -1,5 +1,7 @@
 package com.mygdx.game.objects;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,9 +21,14 @@ public class Pet {
 	float dy = 0;
 	float dyxa = 2;
 	
-	public Pet() {
+	ArrayList<Bullet> bullets;
+	int bulletTimer;
+	
+	public Pet(ArrayList<Bullet> bullets) {
 		this.position = new Vector2(100,100);
 		this.texture = TextureManager.PET_TEXTURE;
+		this.bullets = bullets;
+		bulletTimer = 0;
 	}
 	
 	public void update() {
@@ -46,10 +53,15 @@ public class Pet {
 			if (dx > 4) {dx = 4;}
 			if (dx < -4) {dx = -4;}
 		}
-
-		
 		position.y += dy;
 		position.x += dx;
+		
+		bulletTimer++;
+		
+		if (bulletTimer > 100) {
+			bulletTimer = 0;
+			bullets.add(new Bullet(1,new Vector2(position.x + texture.getWidth(),position.y +(texture.getHeight()/2)), TextureManager.BULLET_TEXTURE,0,new Vector2(5,0),0.5f));
+		}
 		
 	}
 	

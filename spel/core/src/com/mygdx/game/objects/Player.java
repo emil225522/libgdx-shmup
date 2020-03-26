@@ -48,7 +48,7 @@ public final class Player {
 		Player.score = 0;
 		Player.health = Player.maxHealth = 5;
 		Player.shield = Player.maxShield = 0;
-		maxShield =1;
+		//maxShield =1;
 		Player.shieldTimer = Player.bulletTimer = 0;
 		Player.fireRate = 1;
 		Player.gun = 0;
@@ -105,11 +105,11 @@ public final class Player {
 					float offSet = rnd.nextFloat() - 0.5f;
 					bullets.add(
 							new Bullet(damage, new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-									TextureManager.BULLET_TEXTURE, (rnd.nextFloat() - 0.5f)*5, new Vector2(4, 0)));
+									TextureManager.BULLET_TEXTURE, (rnd.nextFloat() - 0.5f)*5, new Vector2(4, 0), 0.9f));
 					
 					bullets.add(
 							new Bullet(damage, new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-									TextureManager.BULLET_TEXTURE, (rnd.nextFloat() - 0.5f)*5, new Vector2(4, 0)));
+									TextureManager.BULLET_TEXTURE, (rnd.nextFloat() - 0.5f)*5, new Vector2(4, 0), 0.9f));
 					
 					if(rnd.nextInt(1000) > 990) {
 				bullets.add(new SuperBullet(5,
