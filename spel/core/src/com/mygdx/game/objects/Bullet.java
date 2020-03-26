@@ -44,7 +44,8 @@ public class Bullet {
 	}
 
 	public void update() {
-		this.hitBox = new Rectangle(position.x, position.y, texture.getWidth()*scale, texture.getHeight()*scale);
+		//this.hitBox = new Rectangle(position.x, position.y, texture.getWidth()*scale, texture.getHeight()*scale);
+		hitBox.set(position.x, position.y, texture.getWidth()*scale, texture.getHeight()*scale);
 		position.add(direction);
 		position.add(0, offSet);
 		

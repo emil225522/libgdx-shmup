@@ -5,6 +5,7 @@ import java.util.Random;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.MyGame;
 
 public class SuperBullet extends Bullet {
 	
@@ -21,7 +22,7 @@ public class SuperBullet extends Bullet {
 	
 	public void update() {
 		super.update();
-		if(rnd.nextInt(1000) > 990) {
+		if(rnd.nextInt(1000) > 1000*(MyGame.WINDOW_WIDTH /(position.x*2))) {
 			//bullets.add(new Bullet(new Vector2(this.position),this.texture,0,-Math.PI/4,7));
 			//bullets.add(new Bullet(new Vector2(this.position),this.texture,0,Math.PI/4,7));
 			for(double i = 0; i < Math.PI*2; i += Math.PI/6) {
