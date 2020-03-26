@@ -24,8 +24,8 @@ public class MyGame extends Game {
 	public static int WINDOW_HEIGHT = 750;
 	public static int GAME_HEIGHT;
 	SpriteBatch spriteBatch;
-	//Texture UITexture;
-	//Texture healthBarTexture;
+	// Texture UITexture;
+	// Texture healthBarTexture;
 	Player player;
 	Pet kotten;
 	long startTime = System.nanoTime();
@@ -36,7 +36,7 @@ public class MyGame extends Game {
 	public ArrayList<Pickup> pickups = new ArrayList<Pickup>();
 	public ArrayList<Explosion> explosions = new ArrayList<Explosion>();
 	Ui ui;
-//	BitmapFont font;
+	// BitmapFont font;
 	StageHandler stageHandler;
 	Background background1;
 	Background background2;
@@ -55,8 +55,9 @@ public class MyGame extends Game {
 		player = new Player(new Vector2(20, WINDOW_HEIGHT / 2), TextureManager.ALIEN_TEXTURE, bullets);
 		kotten = new Pet(bullets);
 		stageHandler = new StageHandler(enemies, bullets, bosses, pickups);
-		background1 = new Background(new Vector2(),TextureManager.BACKGROUND_TEXTURE);
-		background2 = new Background(new Vector2(TextureManager.BACKGROUND_TEXTURE.getWidth(),0),TextureManager.BACKGROUND_TEXTURE);
+		background1 = new Background(new Vector2(), TextureManager.BACKGROUND_TEXTURE);
+		background2 = new Background(new Vector2(TextureManager.BACKGROUND_TEXTURE.getWidth(), 0),
+				TextureManager.BACKGROUND_TEXTURE);
 		GAME_HEIGHT = WINDOW_HEIGHT - TextureManager.UI_TEXTURE.getHeight();
 
 	}
@@ -135,7 +136,8 @@ public class MyGame extends Game {
 		}
 		for (int i = 0; i < enemies.size(); i++) {
 			if (enemies.get(i).isDead == true) {
-				explosions.add(new Explosion(new Vector2(enemies.get(i).getPosition().x,enemies.get(i).getPosition().y),new Vector2()));
+				explosions.add(new Explosion(
+						new Vector2(enemies.get(i).getPosition().x, enemies.get(i).getPosition().y), new Vector2()));
 				enemies.remove(i);
 			}
 		}
@@ -177,15 +179,6 @@ public class MyGame extends Game {
 				}
 			}
 		}
-//		for (Bullet bullet : bullets) {
-//			for (Boss boss : bosses) {
-//				if (bullet.getHitBox().overlaps(boss.getHitBox()) && !(bullet instanceof EnemyBullet)) {
-//					boss.velocity.x = 2;
-//					boss.doDamage(bullet.getDamage());
-//					bullet.isDead = true;
-//				}
-//			}
-//		}
 		for (Enemy enemy : enemies) {
 			if (enemy.getHitBox().overlaps(Player.getHitBox())) {
 				enemy.isDead = true;
@@ -195,19 +188,19 @@ public class MyGame extends Game {
 		for (Pickup pickup : pickups) {
 			if (pickup.getHitBox().overlaps(Player.getHitBox())) {
 				pickup.isDead = true;
-				if (pickup.type == 0){
+				if (pickup.type == 0) {
 					Player.upgrade();
-				}
-				else {
+				} else {
 					Player.heal();
 				}
 			}
 		}
 	}
+
 	public void reset() {
 		bullets = new ArrayList<Bullet>();
 		enemies = new ArrayList<Enemy>();
-	    bosses = new ArrayList<Boss>();
+		bosses = new ArrayList<Boss>();
 		pickups = new ArrayList<Pickup>();
 		startTime = System.nanoTime();
 		stageHandler.reset();

@@ -64,7 +64,7 @@ public class StageHandler {
 		bosses.add(new Spirit(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
 				TextureManager.SPIRIT_TEXTURE, 50, bullets, pickups));
 	}
-	
+
 	Runnable stageFive = () -> {
 		if (!bossSpawned) {
 			bossSpawned = true;
@@ -73,9 +73,9 @@ public class StageHandler {
 			bossAdd();
 		} else if (bosses.size() == 0) {
 			stage++;
-			bossSpawned =  false;
+			bossSpawned = false;
 		}
-		if(random.nextInt(100) > 90) {
+		if (random.nextInt(100) > 90) {
 			if (random.nextInt(5) == 1) {
 				crowAdd();
 			}
@@ -93,8 +93,8 @@ public class StageHandler {
 			bossAdd();
 		} else if (bosses.size() == 0) {
 			stage++;
-			bossSpawned =  false;
-			Player.setMaxShield(Player.getMaxShield()+1);
+			bossSpawned = false;
+			Player.setMaxShield(Player.getMaxShield() + 1);
 		}
 	};
 	Runnable stageTwo = () -> {

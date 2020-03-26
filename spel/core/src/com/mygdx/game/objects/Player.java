@@ -19,26 +19,27 @@ public final class Player {
 	static Rectangle hitBox = new Rectangle();
 	static float dy = 0;
 	static float dya = 2;
+	
 	static int health;
 	static int maxHealth;
-	static int shield = 0;
+	static float shield = 0;
 	static int maxShield = 0;
 	static int shieldTimer = 0;
+	static float shieldRate = 0.01f;
 
 	static long startTime = System.nanoTime();
 	static ArrayList<Bullet> bullets;
 	Random rnd;
 	static int score;
 
-	static int bulletTimer;
 	static boolean isDamaged;
 	static boolean blinkRed;
 	static int damageTimer;
-	
+
+	static int bulletTimer;
 	static int fireRate;
 	static int gun = 0;
 	static int damage = 1;
-	
 
 	public Player(Vector2 position, Texture texture, ArrayList<Bullet> bullets) {
 		Player.texture = texture;
@@ -48,7 +49,7 @@ public final class Player {
 		Player.score = 0;
 		Player.health = Player.maxHealth = 5;
 		Player.shield = Player.maxShield = 0;
-		//maxShield =1;
+		//maxShield = 1;
 		Player.shieldTimer = Player.bulletTimer = 0;
 		Player.fireRate = 1;
 		Player.gun = 0;
@@ -63,18 +64,20 @@ public final class Player {
 		handleShoot();
 		handleBlink();
 		handleShield();
-
 	}
 
 	private void handleShield() {
-		if(shieldTimer == 0) {
-			if(shield < maxShield) {
-				shield++;
+		if (shieldTimer == 0) {
+			if (shield < maxShield) {
+				shield += shieldRate;
+				if (shield > maxShield) {
+					shield = maxShield;
+				}
 			}
-		}else {
+		} else {
 			shieldTimer--;
 		}
-		
+
 	}
 
 	public static Vector2 getCenter() {
@@ -83,47 +86,46 @@ public final class Player {
 	}
 
 	private void handleShoot() {
-		
-		if(Gdx.input.isKeyJustPressed(Keys.Z)) {
+
+		if (Gdx.input.isKeyJustPressed(Keys.Z)) {
 			switchGun();
 		}
-		
+
 		if (Gdx.input.isKeyPressed(Keys.X)) {
 			bulletTimer++;
-			if(gun == 0) {
-				if (bulletTimer > (30f / (Math.log(((double)fireRate)*Math.E)))) {
+			if (gun == 0) {
+				if (bulletTimer > (30f / (Math.log(((double) fireRate) * Math.E)))) {
 					bulletTimer = 0;
 					float offSet = rnd.nextFloat() - 0.5f;
-					bullets.add(
-							new Bullet(2*damage,new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-									TextureManager.BULLET_TEXTURE, offSet, new Vector2(8, 0)));
-					
-					if(rnd.nextInt(1000) > 980) {
+					bullets.add(new Bullet(2 * damage,
+							new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+							TextureManager.BULLET_TEXTURE, offSet, new Vector2(8, 0)));
+
+					if (rnd.nextInt(1000) > 980) {
 						bullets.add(new SuperBullet(5,
 								new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
 								TextureManager.HEALTHBAR_TEXTURE, rnd.nextFloat() - 0.5f, 0, 7, bullets));
-						
+
 					}
 				}
-				
-				
-			}else {
-				if (bulletTimer > (30f * (1f/fireRate))) {
+
+			} else {
+				if (bulletTimer > (30f * (1f / fireRate))) {
 					bulletTimer = 0;
 					float offSet = rnd.nextFloat() - 0.5f;
-					bullets.add(
-							new Bullet(damage, new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-									TextureManager.BULLET_TEXTURE, (rnd.nextFloat() - 0.5f)*5, new Vector2(4, 0), 0.9f));
-					
-					bullets.add(
-							new Bullet(damage, new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-									TextureManager.BULLET_TEXTURE, (rnd.nextFloat() - 0.5f)*5, new Vector2(4, 0), 0.9f));
-					
-					if(rnd.nextInt(1000) > 990) {
-				bullets.add(new SuperBullet(5,
-						new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-						TextureManager.HEALTHBAR_TEXTURE, offSet, 0, 7, bullets));
-						
+					bullets.add(new Bullet(damage,
+							new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+							TextureManager.BULLET_TEXTURE, (rnd.nextFloat() - 0.5f) * 5, new Vector2(4, 0), 0.9f));
+
+					bullets.add(new Bullet(damage,
+							new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+							TextureManager.BULLET_TEXTURE, (rnd.nextFloat() - 0.5f) * 5, new Vector2(4, 0), 0.9f));
+
+					if (rnd.nextInt(1000) > 990) {
+						bullets.add(new SuperBullet(5,
+								new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
+								TextureManager.HEALTHBAR_TEXTURE, offSet, 0, 7, bullets));
+
 					}
 				}
 			}
@@ -132,9 +134,9 @@ public final class Player {
 	}
 
 	private void switchGun() {
-		if(gun == 0) {
+		if (gun == 0) {
 			gun = 1;
-		}else {
+		} else {
 			gun = 0;
 		}
 	}
@@ -183,10 +185,11 @@ public final class Player {
 	}
 
 	public static void doDamage(int damage) {
+
 		if (isDamaged == false) {
 			if (damage <= shield) {
 				shield -= damage;
-			}else {
+			} else {
 				damage -= shield;
 				shield = 0;
 				health -= damage;
@@ -219,15 +222,19 @@ public final class Player {
 	public static int getHealth() {
 		return health;
 	}
+
 	public static int getMaxHealth() {
 		return maxHealth;
 	}
-	public static int getShield() {
+
+	public static float getShield() {
 		return shield;
 	}
+
 	public static int getMaxShield() {
 		return maxShield;
 	}
+
 	public static int getFireRate() {
 		return fireRate;
 	}
@@ -261,7 +268,7 @@ public final class Player {
 
 	public static void setMaxShield(int newShieldValue) {
 		maxShield = newShieldValue;
-		
+
 	}
 
 }

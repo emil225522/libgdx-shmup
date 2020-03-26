@@ -35,7 +35,6 @@ public abstract class Enemy {
 	}
 
 	public void update() {
-		//hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
 		hitBox.set(position.x, position.y, texture.getWidth(), texture.getHeight());
 		position.x += velocity.x;
 		position.y += velocity.y;

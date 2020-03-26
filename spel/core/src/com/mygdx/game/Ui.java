@@ -29,6 +29,7 @@ public class Ui {
 					((float) Player.getShield() / (float) Player.getMaxShield()) * 200,
 					TextureManager.SHEILD_TEXTURE.getHeight());			
 		}
+		//font.draw(spriteBatch,"Shield: " + Player.getShield(), 30,MyGame.WINDOW_HEIGHT - font.getXHeight());
 		
 		spriteBatch.draw(TextureManager.GUN_SELECTOR_TEXTURE, 350, 
 				MyGame.WINDOW_HEIGHT - TextureManager.GUN_SELECTOR_TEXTURE.getHeight()

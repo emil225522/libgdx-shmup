@@ -12,18 +12,19 @@ public class Pickup {
 	public int type = 0;
 	public Vector2 velocity = new Vector2();
 	public boolean isDead = false;
-	Rectangle hitBox = new Rectangle();
+	Rectangle hitBox;
 	
 	public Pickup(Vector2 position, Texture texture,int type) {
 		this.texture = texture;		
 		this.position = position;
 		this.type = type;
+		hitBox = new Rectangle();
 	}
 	public void update() {
 		position.x-= 3;
 		if (position.x < -100)
 			isDead = true;
-		hitBox = new Rectangle(position.x, position.y, texture.getWidth(), texture.getHeight());
+		hitBox.set(position.x, position.y, texture.getWidth(), texture.getHeight());
 	}
 	public void draw(SpriteBatch spriteBatch) {
 		spriteBatch.draw(texture, position.x, position.y);
