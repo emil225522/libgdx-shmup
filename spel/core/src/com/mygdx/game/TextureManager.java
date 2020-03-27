@@ -11,6 +11,7 @@ public class TextureManager {
 	public static final Texture CROW_TEXTURE = new Texture("crow-sprite.png");
 	public static final Texture BIRD_TEXTURE = new Texture("bird.png");
 	public static final Texture SPIRIT_TEXTURE = new Texture("spirit.png");
+	public static final Texture DUCK_TEXTURE = new Texture("rubber-duck.png");
 	public static final Texture PICKUP_TEXTURE = new Texture("upgrade.png");
 	public static final Texture HEART_TEXTURE = new Texture("heart.png");
 	public static final Texture UI_TEXTURE = new Texture("blackRectangle.png");

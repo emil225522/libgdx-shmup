@@ -17,6 +17,8 @@ public class StageHandler {
 	ArrayList<Bullet> bullets;
 	ArrayList<Boss> bosses;
 	ArrayList<Pickup> pickups;
+	
+	static boolean spawned = false;
 
 	public StageHandler(ArrayList<Enemy> enemies, ArrayList<Bullet> bullets, ArrayList<Boss> bosses,
 			ArrayList<Pickup> pickups) {
@@ -107,6 +109,11 @@ public class StageHandler {
 	};
 	Runnable stageOne = () -> {
 		birdAdd();
+		if(!spawned) {
+			//bosses.add(new Duck(new Vector2(500, 500),
+			//		TextureManager.DUCK_TEXTURE, 50, bullets, pickups));
+			spawned = true;
+		}
 	};
 
 	private void stageHandle(Runnable spawnFunction, int spawnRate, long stageTime, int scoreLimit) {
