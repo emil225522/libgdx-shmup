@@ -104,7 +104,7 @@ public final class Player {
 					if (rnd.nextInt(1000) > 980) {
 						bullets.add(new SuperBullet(5,
 								new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-								TextureManager.HEALTHBAR_TEXTURE, rnd.nextFloat() - 0.5f, 0, 7, bullets));
+								TextureManager.BULLET_TEXTURE, rnd.nextFloat() - 0.5f, 0, 7, bullets));
 
 					}
 				}
@@ -124,7 +124,7 @@ public final class Player {
 					if (rnd.nextInt(1000) > 990) {
 						bullets.add(new SuperBullet(5,
 								new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-								TextureManager.HEALTHBAR_TEXTURE, offSet, 0, 7, bullets));
+								TextureManager.BULLET_TEXTURE, offSet, 0, 7, bullets));
 
 					}
 				}

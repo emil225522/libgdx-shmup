@@ -14,7 +14,7 @@ public class SuperBullet extends Bullet {
 
 	public SuperBullet(int damage, Vector2 position, Texture texture, float offSet, double angle, int speed,
 			ArrayList<Bullet> bullets) {
-		super(damage, position, texture, offSet, angle, speed);
+		super(damage, position, texture, offSet, angle, speed, 2);
 
 		this.bullets = bullets;
 		rnd = new Random();

@@ -110,8 +110,8 @@ public class StageHandler {
 	Runnable stageOne = () -> {
 		birdAdd();
 		if(!spawned) {
-			//bosses.add(new Duck(new Vector2(500, 500),
-			//		TextureManager.DUCK_TEXTURE, 50, bullets, pickups));
+			bosses.add(new Duck(new Vector2(500, 500),
+					TextureManager.DUCK_TEXTURE, 50, bullets, pickups));
 			spawned = true;
 		}
 	};

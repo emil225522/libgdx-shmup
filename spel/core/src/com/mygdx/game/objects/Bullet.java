@@ -43,6 +43,14 @@ public class Bullet {
 		this.direction = direction;
 		this.scale = scale;
 	}
+	public Bullet(int damage, Vector2 position, Texture texture, float offSet, double angle, int speed, float scale) {
+		this.damage = damage;
+		this.texture = texture;
+		this.position = position;
+		this.offSet = offSet;
+		this.direction = new Vector2((float) Math.cos(angle) * speed, (float) Math.sin(angle) * speed);
+		this.scale = scale;
+	}
 
 	public void update() {
 		hitBox.set(position.x, position.y, texture.getWidth() * scale, texture.getHeight() * scale);
