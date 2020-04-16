@@ -13,6 +13,7 @@ public abstract class Boss extends Enemy {
 	ArrayList<Bullet> bullets;
 	int idealPosition = MyGame.WINDOW_WIDTH - 150;
 	float playerVelOffset;
+	float maxSpeed = 7;
 	int state = 0;
 	Texture texture;
 
@@ -25,12 +26,16 @@ public abstract class Boss extends Enemy {
 
 	public void update() {
 		super.update();
+		
 		if (position.x > idealPosition)
 			position.x -= 2f;
-		if (position.y + velocity.y < 0 || position.y + texture.getHeight() + velocity.y > MyGame.GAME_HEIGHT) {
-			velocity.y *= -1;
-		}
 		
+		if (velocity.y > maxSpeed) {
+			velocity.y = maxSpeed;
+		}
+		if (velocity.y < -maxSpeed) {
+			velocity.y = -maxSpeed;
+		}
 
 	}
 

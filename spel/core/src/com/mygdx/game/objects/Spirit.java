@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.MyGame;
 import com.mygdx.game.TextureManager;
 
 public class Spirit extends Boss {
@@ -15,6 +16,9 @@ public class Spirit extends Boss {
 
 	public void update() {
 		super.update();
+		if (position.y + velocity.y < 0 || position.y + texture.getHeight() + velocity.y > MyGame.GAME_HEIGHT) {
+			velocity.y *= -1;
+		}
 		switch (state) {
 		case 0:
 			Vector2 shootDir = new Vector2((Player.getCenter().x - this.position.x) / 50,
@@ -38,14 +42,11 @@ public class Spirit extends Boss {
 			}
 			if (health < 20) {
 				state = 1;
+				velocity.y *= 2;
+				idealPosition -= 100;
 			}
 			break;
 		case 1:
-			velocity.y *= 2;
-			idealPosition -= 100;
-			state = 2;
-			break;
-		case 2:
 			bulletTimer++;
 			if (bulletTimer > 50) {
 				bulletTimer = 0;
