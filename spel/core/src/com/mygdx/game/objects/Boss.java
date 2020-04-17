@@ -2,6 +2,7 @@ package com.mygdx.game.objects;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -15,7 +16,10 @@ public abstract class Boss extends Enemy {
 	float playerVelOffset;
 	float maxSpeed = 7;
 	int state = 0;
+	boolean blinkRed;
+	boolean isDamaged;
 	Texture texture;
+	int damageTimer;
 
 	public Boss(Vector2 position, Texture texture, int health, ArrayList<Bullet> bullets, ArrayList<Pickup> pickups) {
 		super(position, texture, health, pickups);
@@ -26,7 +30,7 @@ public abstract class Boss extends Enemy {
 
 	public void update() {
 		super.update();
-		
+		handleBlink();
 		if (position.x > idealPosition)
 			position.x -= 2f;
 		
@@ -42,9 +46,28 @@ public abstract class Boss extends Enemy {
 		}
 
 	}
+	private void handleBlink() {
+		if (isDamaged) {
+			if (damageTimer > 10) {
+				isDamaged = false;
+				damageTimer = 0;
+			} else {
+				damageTimer++;
+				}
+			}
+		}
+	public void doDamage(int damage) {
+		health -= damage;
+		isDamaged = true;
+	}
 
 	public void draw(SpriteBatch spriteBatch) {
-		super.draw(spriteBatch);
+		if (isDamaged) {
+			spriteBatch.setColor(Color.RED);
+			spriteBatch.draw(texture, position.x, position.y);
+			spriteBatch.setColor(Color.WHITE);
+		} else
+			spriteBatch.draw(texture, position.x, position.y);
 	}
 
 }

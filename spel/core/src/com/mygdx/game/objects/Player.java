@@ -58,8 +58,7 @@ public final class Player {
 	}
 
 	public void update() {
-		Player.hitBox.set(position.x, position.y, texture.getWidth(), texture.getHeight());
-		updateScore();
+		Player.hitBox.set(position.x, position.y, texture.getWidth(), texture.getHeight()); 
 		handleMove();
 		handleShoot();
 		handleBlink();
@@ -119,7 +118,7 @@ public final class Player {
 
 					bullets.add(new Bullet(damage,
 							new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-							TextureManager.BULLET_TEXTURE, (rnd.nextFloat() - 0.5f) * 5, new Vector2(4, 0), 0.9f));
+							TextureManager.BULLET_TEXTURE, (0.5f) * 2, new Vector2(4, 0), 0.9f));
 
 					if (rnd.nextInt(1000) > 990) {
 						bullets.add(new SuperBullet(5,
@@ -139,11 +138,6 @@ public final class Player {
 		} else {
 			gun = 0;
 		}
-	}
-
-	private void updateScore() {
-		// vill g�ra n�got h�r sen
-		long elapsed = (System.nanoTime() - startTime) / 1000000;
 	}
 
 	private void handleMove() {

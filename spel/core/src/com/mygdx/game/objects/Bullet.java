@@ -57,9 +57,9 @@ public class Bullet {
 		position.add(direction);
 		position.add(0, offSet);
 
-		if (position.y <= 0 || position.y + texture.getHeight() >= MyGame.GAME_HEIGHT) {
-			direction.y *= -1;
-		}
+//		if (position.y <= 0 || position.y + texture.getHeight() >= MyGame.GAME_HEIGHT) {
+//			direction.y *= -1;
+//		}
 		if (position.x > 1100 || position.x < 0) {
 			isDead = true;
 		}

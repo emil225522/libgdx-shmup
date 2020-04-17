@@ -21,11 +21,11 @@ public class Duck extends Boss {
 				bullets.add(new EnemyBullet(1, new Vector2(position.x + texture.getWidth() / 2, position.y + texture.getHeight() / 2),TextureManager.BULLET_TEXTURE, 0, i, 5, true));
 			}
 		}
-		if (position.y < Player.position.y) {
-			velocity.y+=0.1f;
+		if (position.y < Player.position.y - 5) {
+			velocity.y+=0.05f;
 		}
-		else if (position.y > Player.position.y) {
-			velocity.y-=0.1f;
+		else if (position.y > Player.position.y + 5) {
+			velocity.y-=0.05f;
 		}
 	}
 

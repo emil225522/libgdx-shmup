@@ -61,6 +61,9 @@ public class StageHandler {
 	private void crowAdd() {
 		enemies.add(new Crow(TextureManager.CROW_TEXTURE, bullets, pickups));
 	}
+	private void bombAdd() {
+		enemies.add(new Bomb(TextureManager.BOMB_TEXTURE, bullets, pickups));
+	}
 
 	private void bossAdd() {
 		bosses.add(new Spirit(new Vector2(MyGame.WINDOW_WIDTH, random.nextInt(MyGame.WINDOW_HEIGHT - 45 * 4) + 45),
@@ -109,6 +112,7 @@ public class StageHandler {
 	};
 	Runnable stageOne = () -> {
 		birdAdd();
+		bombAdd();
 		if(!spawned) {
 			bosses.add(new Duck(new Vector2(900, 500),
 					TextureManager.DUCK_TEXTURE, 50, bullets, pickups));
@@ -133,6 +137,7 @@ public class StageHandler {
 	public void reset() {
 		spawnTimer = 0;
 		startTime = System.currentTimeMillis();
+		spawned = false;
 		bossSpawned = false;
 		gameTime = 0;
 	}
