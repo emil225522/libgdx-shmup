@@ -21,5 +21,6 @@ public class TextureManager {
 	public static final Texture PARTICLE_TEXTURE = new Texture("particle.png");
 	public static final Texture GUN_SELECTOR_TEXTURE = new Texture("gunSelector.png");
 	public static final Texture GUN_SELECTOR_FRAME_TEXTURE = new Texture("gunSelectorFrame.png");
+	public static final Texture BOMB_TEXTURE = new Texture("bomb.png");
 
 }

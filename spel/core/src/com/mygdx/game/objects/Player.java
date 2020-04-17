@@ -99,7 +99,7 @@ public final class Player {
 					float offSet = rnd.nextFloat() - 0.5f;
 					bullets.add(new Bullet(2 * damage,
 							new Vector2(position.x + texture.getWidth(), position.y + texture.getHeight() / 2),
-							TextureManager.BULLET_TEXTURE, offSet, new Vector2(8, 0)));
+							TextureManager.BULLET_TEXTURE, offSet, new Vector2(12, 0)));
 
 					if (rnd.nextInt(1000) > 980) {
 						bullets.add(new SuperBullet(5,

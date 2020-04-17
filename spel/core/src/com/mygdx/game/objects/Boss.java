@@ -36,6 +36,10 @@ public abstract class Boss extends Enemy {
 		if (velocity.y < -maxSpeed) {
 			velocity.y = -maxSpeed;
 		}
+		if (position.y > MyGame.GAME_HEIGHT - texture.getHeight()  - velocity.x
+				|| position.y < 0 - velocity.y) {
+			velocity.y *= -0.9f;
+		}
 
 	}
 
