@@ -177,6 +177,10 @@ public class MyGame extends Game {
 					boss.doDamage(bullet.getDamage());
 					bullet.isDead = true;
 				}
+				if (boss.getHitBox().overlaps(Player.getHitBox())) {
+					Player.doDamage(boss.getDamage());
+					boss.doDamage(5);
+				}
 			}
 		}
 		for (Enemy enemy : enemies) {

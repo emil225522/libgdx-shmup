@@ -20,11 +20,13 @@ public abstract class Boss extends Enemy {
 	boolean isDamaged;
 	Texture texture;
 	int damageTimer;
+	int damage;
 
 	public Boss(Vector2 position, Texture texture, int health, ArrayList<Bullet> bullets, ArrayList<Pickup> pickups) {
 		super(position, texture, health, pickups);
 		this.bullets = bullets;
 		this.texture = texture;
+		damage = 1;
 		velocity.y = 2;
 	}
 
@@ -59,6 +61,9 @@ public abstract class Boss extends Enemy {
 	public void doDamage(int damage) {
 		health -= damage;
 		isDamaged = true;
+	}
+	public int getDamage() {
+		return damage;
 	}
 
 	public void draw(SpriteBatch spriteBatch) {
