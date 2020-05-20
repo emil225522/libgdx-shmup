@@ -23,6 +23,7 @@ public class MyGame extends Game {
 	public static int WINDOW_WIDTH = 1000;
 	public static int WINDOW_HEIGHT = 750;
 	public static int GAME_HEIGHT;
+	public static int GAME_WIDTH;
 	SpriteBatch spriteBatch;
 	// Texture UITexture;
 	// Texture healthBarTexture;
@@ -59,6 +60,7 @@ public class MyGame extends Game {
 		background2 = new Background(new Vector2(TextureManager.BACKGROUND_TEXTURE.getWidth(), 0),
 				TextureManager.BACKGROUND_TEXTURE);
 		GAME_HEIGHT = WINDOW_HEIGHT - TextureManager.UI_TEXTURE.getHeight();
+		GAME_WIDTH = WINDOW_WIDTH - TextureManager.UI_TEXTURE.getWidth();
 
 	}
 
@@ -179,7 +181,6 @@ public class MyGame extends Game {
 				}
 				if (boss.getHitBox().overlaps(Player.getHitBox())) {
 					Player.doDamage(boss.getDamage());
-					boss.doDamage(5);
 				}
 			}
 		}

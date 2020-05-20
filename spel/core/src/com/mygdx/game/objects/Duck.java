@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.MyGame;
 import com.mygdx.game.TextureManager;
 
 public class Duck extends Boss {
@@ -42,7 +43,7 @@ public class Duck extends Boss {
 
 			//velocity = new Vector2();
 			if (random.nextBoolean()) {
-				System.out.println("sdasdasdadasd");
+
 			position.x+= 2f;
 			}
 			else {
@@ -58,6 +59,12 @@ public class Duck extends Boss {
 				velocity.x = 15;
 			}
 
+		}
+		if(position.y < 0) {
+			velocity.y+=2;
+		}
+		if(position.y > MyGame.GAME_HEIGHT) {
+			velocity.y-=2;
 		}
 	}
 
